@@ -3,6 +3,13 @@
 
 int main(int argc, char **argv)
 {
+
+	int plateau[64][64];
+
+
+
+
+
 	sf::Window window(sf::VideoMode(800, 600), "My window");
 
 	// on fait tourner le programme jusqu'à ce que la fenêtre soit fermée
