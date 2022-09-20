@@ -1,0 +1,11 @@
+﻿  main.cpp
+c:\users\charles\documents\github\projet-echec\main.cpp(7): warning C4101: 'plateau' : variable locale non référencée
+  menu.cpp
+c:\users\charles\documents\github\projet-echec\menu.cpp(11): error C4996: 'sf::Text::setColor': a été déclaré déconseillé
+  c:\users\charles\documents\github\projet-echec\sfml\include\sfml\graphics\text.hpp(210): note: voir la déclaration de 'sf::Text::setColor'
+c:\users\charles\documents\github\projet-echec\menu.cpp(16): error C4996: 'sf::Text::setColor': a été déclaré déconseillé
+  c:\users\charles\documents\github\projet-echec\sfml\include\sfml\graphics\text.hpp(210): note: voir la déclaration de 'sf::Text::setColor'
+c:\users\charles\documents\github\projet-echec\menu.cpp(21): error C4996: 'sf::Text::setColor': a été déclaré déconseillé
+  c:\users\charles\documents\github\projet-echec\sfml\include\sfml\graphics\text.hpp(210): note: voir la déclaration de 'sf::Text::setColor'
+c:\users\charles\documents\github\projet-echec\menu.cpp(32): fatal error C1004: fin de fichier inattendue rencontrée
+  Génération de code en cours...
