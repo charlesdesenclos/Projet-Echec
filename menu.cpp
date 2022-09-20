@@ -1,31 +1,38 @@
-#include "menu.h"
+#include "Menu.h"
 
-menu::menu(float width, float height)
+Menu::Menu(float width, float height)
 {
 	if (!font.loadFromFile("donnees/ALGER.ttf"))
 	{
 		//handle error
 	}
 
-	Menu[0].setFont(font);
-	Menu[0].setColor(sf::Color::Red);
-	Menu[0].setString("Nouvelle Partie");
-	Menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 1));
+	menu[0].setFont(font);
+	menu[0].setColor(sf::Color::Red);
+	menu[0].setString("Nouvelle Partie");
+	menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 1));
 
-	Menu[1].setFont(font);
-	Menu[1].setColor(sf::Color::White);
-	Menu[1].setString("Instruction");
-	Menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 2));
+	menu[1].setFont(font);
+	menu[1].setColor(sf::Color::White);
+	menu[1].setString("Instruction");
+	menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 2));
 
-	Menu[2].setFont(font);
-	Menu[2].setColor(sf::Color::Red);
-	Menu[2].setString("Quitter");
-	Menu[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
+	menu[2].setFont(font);
+	menu[2].setColor(sf::Color::Red);
+	menu[2].setString("Quitter");
+	menu[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
 }
 
-menu::~menu()
+Menu::~Menu()
 {
 
 }
 
-void menu
+void Menu::draw(sf::RenderWindow &window)
+{
+	for (int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
+	{
+		window.draw(menu[i]);
+
+	}
+}
