@@ -4,23 +4,44 @@ Menu::Menu(float width, float height)
 {
 	if (!font.loadFromFile("donnees/ALGER.ttf"))
 	{
-		//handle error
+		cout << "Image non trouvé";
 	}
 
+
+
+	// Nouvelles parties
+
 	menu[0].setFont(font);
-	menu[0].setColor(sf::Color::Red);
-	menu[0].setString("Nouvelle Partie");
-	menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 1));
+	menu[0].setFillColor(Color::White);
+	menu[0].setString("Nouvelles Parties");
+	menu[0].setCharacterSize(70);
+	menu[0].setPosition(400, 200);
+
+	// Instructions
 
 	menu[1].setFont(font);
-	menu[1].setColor(sf::Color::White);
-	menu[1].setString("Instruction");
-	menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 2));
+	menu[1].setFillColor(Color::White);
+	menu[1].setString("Instructions");
+	menu[1].setCharacterSize(70);
+	menu[1].setPosition(400, 300);
 
+	//Options
+	
 	menu[2].setFont(font);
-	menu[2].setColor(sf::Color::Red);
-	menu[2].setString("Quitter");
-	menu[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
+	menu[2].setFillColor(Color::White);
+	menu[2].setString("Options");
+	menu[2].setCharacterSize(70);
+	menu[2].setPosition(400, 400);
+
+	//Quitter
+
+	menu[3].setFont(font);
+	menu[3].setFillColor(Color::White);
+	menu[3].setString("Quitter");
+	menu[3].setCharacterSize(70);
+	menu[3].setPosition(400, 500);
+
+	MenuSelected = -1;
 }
 
 Menu::~Menu()
@@ -28,11 +49,46 @@ Menu::~Menu()
 
 }
 
-void Menu::draw(sf::RenderWindow &window)
-{
-	for (int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
-	{
-		window.draw(menu[i]);
+//afficher le menu
 
+void Menu::draw(RenderWindow& windows)
+{
+	for (int i = 0; i < Max_main_menu; ++i)
+	{
+		windows.draw(menu[i]);
+	}
+}
+
+// gère le dépacement vers le haut
+
+void Menu::MoveUp()
+{
+	if (MenuSelected - 1 >= 0)
+	{
+		menu[MenuSelected].setFillColor(Color::White);
+
+		MenuSelected--;
+
+		if (MenuSelected == -1)
+		{
+			MenuSelected = 2;
+		}
+		menu[MenuSelected].setFillColor(Color::Blue);
+	}
+}
+
+// gère le dépacement vers le bas
+
+void Menu::MoveDown()
+{
+	if (MenuSelected + 1 <= Max_main_menu)
+	{
+		menu[MenuSelected].setFillColor(Color::White);
+		MenuSelected++;
+		if (MenuSelected == 4)
+		{
+			MenuSelected = 0;
+		}
+		menu[MenuSelected].setFillColor(Color::Blue);
 	}
 }
