@@ -17,6 +17,7 @@ public:
 	void draw(RenderWindow& window);
 	void MoveUp();
 	void MoveDown();
+	
 
 	int MenuPressed()
 	{

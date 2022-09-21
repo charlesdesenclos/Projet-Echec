@@ -92,3 +92,4 @@ void Menu::MoveDown()
 		menu[MenuSelected].setFillColor(Color::Blue);
 	}
 }
+
