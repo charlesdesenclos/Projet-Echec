@@ -299,7 +299,7 @@ void main(int argc, char **argv)
 				if (event.mouseButton.button == Mouse::Left)
 				{
 					
-					printf("%d %d\n", event.mouseButton.x, event.mouseButton.y);
+					//printf("%d %d\n", event.mouseButton.x, event.mouseButton.y);
 					
 					if (event.mouseButton.x >= 337 && event.mouseButton.y >= 199)
 					{
