@@ -14,32 +14,32 @@ Menu::Menu(float width, float height)
 	menu[0].setFont(font);
 	menu[0].setFillColor(Color::White);
 	menu[0].setString("Nouvelles Parties");
-	menu[0].setCharacterSize(70);
-	menu[0].setPosition(400, 200);
+	menu[0].setCharacterSize(40);
+	menu[0].setPosition(350, 200);
 
 	// Instructions
 
 	menu[1].setFont(font);
 	menu[1].setFillColor(Color::White);
 	menu[1].setString("Instructions");
-	menu[1].setCharacterSize(70);
-	menu[1].setPosition(400, 300);
+	menu[1].setCharacterSize(40);
+	menu[1].setPosition(350, 300);
 
 	//Options
 	
 	menu[2].setFont(font);
 	menu[2].setFillColor(Color::White);
 	menu[2].setString("Options");
-	menu[2].setCharacterSize(70);
-	menu[2].setPosition(400, 400);
+	menu[2].setCharacterSize(40);
+	menu[2].setPosition(350, 400);
 
 	//Quitter
 
 	menu[3].setFont(font);
 	menu[3].setFillColor(Color::White);
 	menu[3].setString("Quitter");
-	menu[3].setCharacterSize(70);
-	menu[3].setPosition(400, 500);
+	menu[3].setCharacterSize(40);
+	menu[3].setPosition(350, 500);
 
 	MenuSelected = -1;
 }

@@ -1,8 +1,2 @@
-﻿  main.cpp
-c:\users\darkt\documents\github\projet-echec\main.cpp(8): warning C4326: le type de retour de 'main' doit être 'int' au lieu de 'void'
-c:\users\darkt\documents\github\projet-echec\main.cpp(13): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-  TemplateSFML.vcxproj -> C:\Users\darkt\Documents\GitHub\Projet-Echec\x64\Debug\TemplateSFML.exe
+﻿  Menu.cpp
+  TemplateSFML.vcxproj -> C:\Users\Charles\Documents\GitHub\Projet-Echec\x64\Debug\TemplateSFML.exe
