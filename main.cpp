@@ -177,122 +177,6 @@ void main(int argc, char **argv)
 
 				}
 
-				if (event.type == Event::MouseButtonPressed)
-				{
-
-					if (event.mouseButton.button == Mouse::Left)
-					{
-						RenderWindow Play(VideoMode(960, 720), "Echecs");
-						RenderWindow Instructions(VideoMode(960, 720), "Instructions");
-						RenderWindow Options(VideoMode(960, 720), "Options");
-
-
-						int x = menu.MenuPressed();
-						if (x == 0)
-						{
-							while (Play.isOpen())
-							{
-								Event aevent;
-								while (Play.pollEvent(aevent))
-								{
-									if (aevent.type == Event::Closed)
-									{
-										Play.close();
-
-									}
-									if (aevent.type == Event::MouseButtonReleased)
-									{
-										if (aevent.mouseButton.button == Mouse::Left)
-										{
-											Play.close();
-										}
-									}
-								}
-								Instructions.close();
-								Options.close();
-								Play.clear();
-
-								Play.draw(Pbackground);
-
-								Play.display();
-							}
-
-						}
-						if (x == 1)
-						{
-							while (Instructions.isOpen())
-							{
-								Event aevent;
-								while (Instructions.pollEvent(aevent))
-								{
-									if (aevent.type == Event::Closed)
-									{
-										Instructions.close();
-									}
-									if (aevent.type == Event::MouseButtonReleased)
-									{
-										if (aevent.mouseButton.button == Mouse::Left)
-										{
-											Instructions.close();
-										}
-									}
-								}
-								Play.close();
-								Instructions.clear();
-								Options.close();
-
-								Instructions.draw(Ibackground);
-
-								Instructions.display();
-
-
-							}
-						}
-						if (x == 2)
-						{
-							while (Options.isOpen())
-							{
-								Event aevent;
-								while (Options.pollEvent(aevent))
-								{
-									if (aevent.type == Event::Closed)
-									{
-										Options.close();
-									}
-									if (aevent.type == Event::MouseButtonReleased)
-									{
-										if (aevent.mouseButton.button == Mouse::Left)
-										{
-											Options.close();
-										}
-									}
-								}
-								Play.close();
-								Instructions.clear();
-								Options.clear();
-
-								Options.draw(Obackground);
-
-								Options.display();
-
-							}
-						}
-
-						if (x == 3)
-						{
-							window.close();
-							break;
-						}
-					}
-
-				}
-
-
-
-
-
-
-
 			}
 			else if (event.type == Event::MouseButtonPressed)
 			{
@@ -307,9 +191,11 @@ void main(int argc, char **argv)
 						{
 							window.close();
 							RenderWindow Play(VideoMode(960, 720), "Echecs");
+							
 
 							while (Play.isOpen())
 							{
+								Menu AfficheNP();
 								Event aevent;
 								while (Play.pollEvent(aevent))
 								{

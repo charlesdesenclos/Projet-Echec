@@ -5,4 +5,7 @@ c:\users\charles\documents\github\projet-echec\main.cpp(13): warning C4244: 'arg
           [
               T=unsigned int
           ]
+c:\users\charles\documents\github\projet-echec\main.cpp(198): warning C4930: 'Menu AfficheNP(void)' : fonction prototypée non appelée (était-ce la définition de variable souhaitée ?)
+  Menu.cpp
+  Génération de code en cours...
   TemplateSFML.vcxproj -> C:\Users\Charles\Documents\GitHub\Projet-Echec\x64\Debug\TemplateSFML.exe
