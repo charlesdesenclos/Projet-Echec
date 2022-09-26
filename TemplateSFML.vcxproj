@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AfficheNP.cpp" />
+    <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Plateau.cpp" />
@@ -138,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AfficheNP.h" />
+    <ClInclude Include="Instructions.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Plateau.h" />
   </ItemGroup>

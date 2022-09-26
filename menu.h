@@ -18,8 +18,6 @@ public:
 	void MoveUp();
 	void MoveDown();
 	
-	void AfficheI();
-	void AfficheO();
 
 	int MenuPressed()
 	{

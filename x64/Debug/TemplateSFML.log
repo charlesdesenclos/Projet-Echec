@@ -1,18 +1,25 @@
-﻿  main.cpp
-c:\users\charles\documents\github\projet-echec\main.cpp(9): warning C4326: le type de retour de 'main' doit être 'int' au lieu de 'void'
-c:\users\charles\documents\github\projet-echec\main.cpp(14): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+﻿  Instructions.cpp
+  main.cpp
+c:\users\charles\documents\github\projet-echec\main.cpp(10): warning C4326: le type de retour de 'main' doit être 'int' au lieu de 'void'
+c:\users\charles\documents\github\projet-echec\main.cpp(15): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\charles\documents\github\projet-echec\main.cpp(80): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(81): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\charles\documents\github\projet-echec\main.cpp(201): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(202): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
+c:\users\charles\documents\github\projet-echec\main.cpp(306): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+  Génération de code en cours...
   TemplateSFML.vcxproj -> C:\Users\Charles\Documents\GitHub\Projet-Echec\x64\Debug\TemplateSFML.exe

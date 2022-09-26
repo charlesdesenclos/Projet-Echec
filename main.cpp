@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Menu.h"
 #include "AfficheNP.h"
+#include "Instructions.h"
 
 using namespace sf;
 
@@ -300,26 +301,32 @@ void main(int argc, char **argv)
 						if (event.mouseButton.x <= 623 && event.mouseButton.y <= 341)
 						{
 							window.close();
-							RenderWindow Instructions(VideoMode(960, 720), "Instructions");
+							RenderWindow Instruction(VideoMode(960, 720), "Instructions");
 
-							while (Instructions.isOpen())
+							Instructions Instructions(Instruction.getSize().x, Instruction.getSize().y);
+
+							while (Instruction.isOpen())
 							{
 								Event aevent;
-								while (Instructions.pollEvent(aevent))
+								while (Instruction.pollEvent(aevent))
 								{
 									if (aevent.type == Event::Closed)
 									{
-										Instructions.close();
+										Instruction.close();
 									}
+
+
 										
 								}
 									
-								Instructions.clear();
+								Instruction.clear();
 									
 
-								Instructions.draw(Ibackground);
+								Instruction.draw(Ibackground);
 
-								Instructions.display();
+								Instructions.draw(Instruction);
+
+								Instruction.display();
 							}
 						}
 					}
