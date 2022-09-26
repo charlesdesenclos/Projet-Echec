@@ -17,7 +17,7 @@ public:
 	void draw(RenderWindow& window);
 	void MoveUp();
 	void MoveDown();
-	void AfficheNP();
+	
 	void AfficheI();
 	void AfficheO();
 
@@ -32,5 +32,6 @@ private:
 	int MenuSelected;
 	Font font;
 	Text menu[Max_main_menu];
+	Text menuNP[Max_main_menu];
 
 };

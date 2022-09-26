@@ -4,7 +4,7 @@ Menu::Menu(float width, float height)
 {
 	if (!font.loadFromFile("donnees/ALGER.ttf"))
 	{
-		cout << "Image non trouvé";
+		cout << "Police non trouvé";
 	}
 
 
@@ -93,31 +93,5 @@ void Menu::MoveDown()
 	}
 }
 
-void Menu::AfficheNP()
-{
-	// Solo
 
-	menu[4].setFont(font);
-	menu[4].setFillColor(Color::White);
-	menu[4].setString("Solo");
-	menu[4].setCharacterSize(40);
-	menu[4].setPosition(350, 200);
 
-	// Multijoueur
-
-	menu[5].setFont(font);
-	menu[5].setFillColor(Color::White);
-	menu[5].setString("Multijoueur");
-	menu[5].setCharacterSize(40);
-	menu[5].setPosition(350, 300);
-}
-
-void Menu::AfficheI()
-{
-
-}
-
-void Menu::AfficheO()
-{
-
-}

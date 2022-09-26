@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Menu.h"
+#include "AfficheNP.h"
 
 using namespace sf;
 
@@ -12,6 +13,7 @@ void main(int argc, char **argv)
 
 	Menu menu(window.getSize().x, window.getSize().y);
 
+	
 	// Affichage du thème à la page d'accueil
 
 	RectangleShape background;
@@ -74,6 +76,8 @@ void main(int argc, char **argv)
 				if (event.key.code == Keyboard::Return)
 				{
 					RenderWindow Play(VideoMode(960, 720), "Echecs");
+
+					AfficheNP AfficheNP(Play.getSize().x, Play.getSize().y);
 					RenderWindow Instructions(VideoMode(960, 720), "Instructions");
 					RenderWindow Options(VideoMode(960, 720), "Options");
 
@@ -104,6 +108,8 @@ void main(int argc, char **argv)
 							Play.clear();
 
 							Play.draw(Pbackground);
+
+							AfficheNP.draw(Play);
 
 							Play.display();
 						}
@@ -191,11 +197,15 @@ void main(int argc, char **argv)
 						{
 							window.close();
 							RenderWindow Play(VideoMode(960, 720), "Echecs");
+
+							AfficheNP AfficheNP(Play.getSize().x, Play.getSize().y);
+
+							
 							
 
 							while (Play.isOpen())
 							{
-								Menu AfficheNP();
+								
 								Event aevent;
 								while (Play.pollEvent(aevent))
 								{
@@ -205,13 +215,84 @@ void main(int argc, char **argv)
 
 									}
 
+									if (aevent.type == Event::MouseButtonPressed)
+									{
+										if (aevent.mouseButton.button == Mouse::Left)
+										{
+											if (aevent.mouseButton.x >= 337 && aevent.mouseButton.y >= 199)
+											{
+												if (aevent.mouseButton.x <= 750 && aevent.mouseButton.y <= 245)
+												{
+
+													
+													Play.close();
+													RenderWindow Plateau(VideoMode(960, 720), "Plateau");
+
+													while (Plateau.isOpen())
+													{
+														Event aevent;
+														while (Plateau.pollEvent(aevent))
+														{
+															if (aevent.type == Event::Closed)
+															{
+																Plateau.close();
+															}
+
+														}
+
+														Plateau.clear();
+
+
+														Plateau.draw(Ibackground);
+
+														Plateau.display();
+													}
+												}
+											}
+											if (aevent.mouseButton.x >= 343 && aevent.mouseButton.y >= 305)
+											{
+												if (aevent.mouseButton.x <= 623 && aevent.mouseButton.y <= 341)
+												{
+													Play.close();
+													RenderWindow Multi(VideoMode(960, 720), "Multi");
+
+													while (Multi.isOpen())
+													{
+														Event aevent;
+														while (Multi.pollEvent(aevent))
+														{
+															if (aevent.type == Event::Closed)
+															{
+																Multi.close();
+															}
+
+														}
+
+														Multi.clear();
+
+
+														Multi.draw(Ibackground);
+
+														Multi.display();
+													}
+												}
+											}
+										}
+
+									}
+
 								}
 								Play.clear();
 
 								Play.draw(Pbackground);
 
+
+
+								AfficheNP.draw(Play);
+
 								Play.display();
 							}
+							
 						}
 
 					if (event.mouseButton.x >= 343 && event.mouseButton.y >= 305)
@@ -290,6 +371,9 @@ void main(int argc, char **argv)
 			window.draw(background);
 			menu.draw(window);
 			window.display();
+
+			
+
 
 		}
 
