@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "AfficheNP.h"
 #include "Instructions.h"
+#include "Plateau.h"
 
 using namespace sf;
 
@@ -227,27 +228,47 @@ void main(int argc, char **argv)
 
 													
 													Play.close();
-													RenderWindow Plateau(VideoMode(960, 720), "Plateau");
+													RenderWindow Plateaux(VideoMode(960, 720), "Plateau");
 
-													while (Plateau.isOpen())
+													Texture image;
+
+													image.loadFromFile("./donnees/board.png");
+
+													Sprite sprite;
+													image.setSmooth(true);
+													sprite.setTexture(image);
+
+													sprite.setScale(1.4f, 1.4f);
+													
+													while (Plateaux.isOpen())
 													{
+														
+
+
+
+
+														
+														
 														Event aevent;
-														while (Plateau.pollEvent(aevent))
+														while (Plateaux.pollEvent(aevent))
 														{
 															if (aevent.type == Event::Closed)
 															{
-																Plateau.close();
+																Plateaux.close();
 															}
 
 														}
 
-														Plateau.clear();
+														Plateaux.clear();
 
 
-														Plateau.draw(Ibackground);
+														Plateaux.draw(sprite);
 
-														Plateau.display();
+														Plateaux.display();
+
+														
 													}
+													
 												}
 											}
 											if (aevent.mouseButton.x >= 343 && aevent.mouseButton.y >= 305)
@@ -256,6 +277,16 @@ void main(int argc, char **argv)
 												{
 													Play.close();
 													RenderWindow Multi(VideoMode(960, 720), "Multi");
+
+													Texture image;
+
+													image.loadFromFile("./donnees/board.png");
+
+													Sprite sprite;
+													image.setSmooth(true);
+													sprite.setTexture(image);
+
+													sprite.setScale(1.4f, 1.4f);
 
 													while (Multi.isOpen())
 													{
@@ -272,7 +303,7 @@ void main(int argc, char **argv)
 														Multi.clear();
 
 
-														Multi.draw(Ibackground);
+														Multi.draw(sprite);
 
 														Multi.display();
 													}
