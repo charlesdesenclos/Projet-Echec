@@ -367,6 +367,120 @@ void main(int argc, char **argv)
 													sprite_tour2.setScale(0.6f, 0.6f);
 
 													sprite_tour2.setPosition(585, 580);
+
+													//Affichage des pions 
+
+													Texture image_pion;
+
+													image_pion.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion;
+
+													image_pion.setSmooth(true);
+
+													sprite_pion.setTexture(image_pion);
+
+													sprite_pion.setScale(0.6f, 0.6f);
+
+													sprite_pion.setPosition(30, 500);
+
+													Texture image_pion2;
+
+													image_pion2.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion2;
+
+													image_pion2.setSmooth(true);
+
+													sprite_pion2.setTexture(image_pion2);
+
+													sprite_pion2.setScale(0.6f, 0.6f);
+
+													sprite_pion2.setPosition(110, 500);
+
+													Texture image_pion3;
+
+													image_pion3.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion3;
+
+													image_pion3.setSmooth(true);
+
+													sprite_pion3.setTexture(image_pion3);
+
+													sprite_pion3.setScale(0.6f, 0.6f);
+
+													sprite_pion3.setPosition(190, 500);
+
+													Texture image_pion4;
+
+													image_pion4.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion4;
+
+													image_pion4.setSmooth(true);
+
+													sprite_pion4.setTexture(image_pion4);
+
+													sprite_pion4.setScale(0.6f, 0.6f);
+
+													sprite_pion4.setPosition(270, 500);
+
+													Texture image_pion5;
+
+													image_pion5.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion5;
+
+													image_pion5.setSmooth(true);
+
+													sprite_pion5.setTexture(image_pion5);
+
+													sprite_pion5.setScale(0.6f, 0.6f);
+
+													sprite_pion5.setPosition(350, 500);
+
+													Texture image_pion6;
+
+													image_pion6.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion6;
+
+													image_pion6.setSmooth(true);
+
+													sprite_pion6.setTexture(image_pion6);
+
+													sprite_pion6.setScale(0.6f, 0.6f);
+
+													sprite_pion6.setPosition(425, 500);
+
+													Texture image_pion7;
+
+													image_pion7.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion7;
+
+													image_pion7.setSmooth(true);
+
+													sprite_pion7.setTexture(image_pion7);
+
+													sprite_pion7.setScale(0.6f, 0.6f);
+
+													sprite_pion7.setPosition(505, 500);
+
+													Texture image_pion8;
+
+													image_pion8.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion8;
+
+													image_pion8.setSmooth(true);
+
+													sprite_pion8.setTexture(image_pion8);
+
+													sprite_pion8.setScale(0.6f, 0.6f);
+
+													sprite_pion8.setPosition(585, 500);
 													
 													
 													while (Plateaux.isOpen())
@@ -408,6 +522,22 @@ void main(int argc, char **argv)
 														Plateaux.draw(sprite_tour);
 
 														Plateaux.draw(sprite_tour2);
+
+														Plateaux.draw(sprite_pion);
+
+														Plateaux.draw(sprite_pion2);
+
+														Plateaux.draw(sprite_pion3);
+
+														Plateaux.draw(sprite_pion4);
+
+														Plateaux.draw(sprite_pion5);
+
+														Plateaux.draw(sprite_pion6);
+
+														Plateaux.draw(sprite_pion7);
+
+														Plateaux.draw(sprite_pion8);
 
 														Plateaux.display();
 
