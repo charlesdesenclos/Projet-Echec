@@ -246,6 +246,8 @@ void main(int argc, char **argv)
 
 													sprite.setScale(1.4f, 1.4f);
 
+													//Affichage pion blanc
+
 													//Affichage pion roi
 
 													Texture image_roi;
@@ -481,6 +483,276 @@ void main(int argc, char **argv)
 													sprite_pion8.setScale(0.6f, 0.6f);
 
 													sprite_pion8.setPosition(585, 500);
+
+													//Affichage pion noir
+
+													//Affichage pion roi
+
+													Texture image_roin;
+
+													image_roin.loadFromFile("./donnees/king.png");
+
+													Sprite sprite_roin;
+
+													image_roin.setSmooth(true);
+
+													sprite_roin.setTexture(image_roin);
+
+													sprite_roin.setColor(Color::Black);
+
+													sprite_roin.setScale(0.6f, 0.6f);
+
+													sprite_roin.setPosition(350, 30);
+
+													//Affichage pion reine
+
+													Texture image_reinen;
+
+													image_reinen.loadFromFile("./donnees/queen.png");
+
+													Sprite sprite_reinen;
+
+													image_reinen.setSmooth(true);
+
+													sprite_reinen.setTexture(image_reinen);
+
+													sprite_reinen.setColor(Color::Black);
+
+													sprite_reinen.setScale(0.6f, 0.6f);
+
+													sprite_reinen.setPosition(270, 30);
+
+													//Affichage des pions fou 
+
+													Texture image_foun;
+
+													image_foun.loadFromFile("./donnees/fou.png");
+
+													Sprite sprite_foun;
+
+													image_foun.setSmooth(true);
+
+													sprite_foun.setTexture(image_foun);
+
+													sprite_foun.setColor(Color::Black);
+
+													sprite_foun.setScale(0.6f, 0.6f);
+
+													sprite_foun.setPosition(190, 30);
+
+													Texture image_fou2n;
+
+													image_fou2n.loadFromFile("./donnees/fou.png");
+
+													Sprite sprite_fou2n;
+
+													image_foun.setSmooth(true);
+
+													sprite_fou2n.setTexture(image_fou2n);
+
+													sprite_fou2n.setColor(Color::Black);
+
+													sprite_fou2n.setScale(0.6f, 0.6f);
+
+													sprite_fou2n.setPosition(425, 30);
+
+													//Affichage des pions chevaliers
+
+													Texture image_chavaliern;
+
+													image_chavaliern.loadFromFile("./donnees/knight.png");
+
+													Sprite sprite_chevaliern;
+
+													image_chavaliern.setSmooth(true);
+
+													sprite_chevaliern.setTexture(image_chavaliern);
+
+													sprite_chevaliern.setColor(Color::Black);
+
+													sprite_chevaliern.setScale(0.6f, 0.6f);
+
+													sprite_chevaliern.setPosition(110, 30);
+
+													Texture image_chevalier2n;
+
+													image_chevalier2n.loadFromFile("./donnees/knight.png");
+
+													Sprite sprite_chevalier2n;
+
+													image_chevalier2n.setSmooth(true);
+
+													sprite_chevalier2n.setTexture(image_chevalier2n);
+
+													sprite_chevalier2n.setColor(Color::Black);
+
+													sprite_chevalier2n.setScale(0.6f, 0.6f);
+
+													sprite_chevalier2n.setPosition(505, 30);
+
+													//Affichage des pions tours
+
+													Texture image_tourn;
+
+													image_tourn.loadFromFile("./donnees/rook.png");
+
+													Sprite sprite_tourn;
+
+													image_tourn.setSmooth(true);
+
+													sprite_tourn.setTexture(image_tourn);
+
+													sprite_tourn.setColor(Color::Black);
+
+													sprite_tourn.setScale(0.6f, 0.6f);
+
+													sprite_tourn.setPosition(30, 30);
+
+													Texture image_tour2n;
+
+													image_tour2n.loadFromFile("./donnees/rook.png");
+
+													Sprite sprite_tour2n;
+
+													image_tour2n.setSmooth(true);
+
+													sprite_tour2n.setTexture(image_tour2n);
+
+													sprite_tour2n.setColor(Color::Black);
+
+													sprite_tour2n.setScale(0.6f, 0.6f);
+
+													sprite_tour2n.setPosition(585, 30);
+
+													//Affichage des pions 
+
+													Texture image_pionn;
+
+													image_pionn.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pionn;
+
+													image_pionn.setSmooth(true);
+
+													sprite_pionn.setTexture(image_pionn);
+
+													sprite_pionn.setColor(Color::Black);
+
+													sprite_pionn.setScale(0.6f, 0.6f);
+
+													sprite_pionn.setPosition(30, 110);
+
+													Texture image_pion2n;
+
+													image_pion2n.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion2n;
+
+													image_pion2n.setSmooth(true);
+
+													sprite_pion2n.setTexture(image_pion2n);
+
+													sprite_pion2n.setColor(Color::Black);
+
+													sprite_pion2n.setScale(0.6f, 0.6f);
+
+													sprite_pion2n.setPosition(110, 110);
+
+													Texture image_pion3n;
+
+													image_pion3n.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion3n;
+
+													image_pion3n.setSmooth(true);
+
+													sprite_pion3n.setTexture(image_pion3n);
+
+													sprite_pion3n.setColor(Color::Black);
+
+													sprite_pion3n.setScale(0.6f, 0.6f);
+
+													sprite_pion3n.setPosition(190, 110);
+
+													Texture image_pion4n;
+
+													image_pion4n.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion4n;
+
+													image_pion4n.setSmooth(true);
+
+													sprite_pion4n.setTexture(image_pion4n);
+
+													sprite_pion4n.setColor(Color::Black);
+
+													sprite_pion4n.setScale(0.6f, 0.6f);
+
+													sprite_pion4n.setPosition(270, 110);
+
+													Texture image_pion5n;
+
+													image_pion5n.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion5n;
+
+													image_pion5n.setSmooth(true);
+
+													sprite_pion5n.setTexture(image_pion5n);
+
+													sprite_pion5n.setColor(Color::Black);
+
+													sprite_pion5n.setScale(0.6f, 0.6f);
+
+													sprite_pion5n.setPosition(350, 110);
+
+													Texture image_pion6n;
+
+													image_pion6n.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion6n;
+
+													image_pion6n.setSmooth(true);
+
+													sprite_pion6n.setTexture(image_pion6n);
+
+													sprite_pion6n.setColor(Color::Black);
+
+													sprite_pion6n.setScale(0.6f, 0.6f);
+
+													sprite_pion6n.setPosition(425, 110);
+
+													Texture image_pion7n;
+
+													image_pion7n.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion7n;
+
+													image_pion7n.setSmooth(true);
+
+													sprite_pion7n.setTexture(image_pion7n);
+
+													sprite_pion7n.setColor(Color::Black);
+
+													sprite_pion7n.setScale(0.6f, 0.6f);
+
+													sprite_pion7n.setPosition(505, 110);
+
+													Texture image_pion8n;
+
+													image_pion8n.loadFromFile("./donnees/pawn.png");
+
+													Sprite sprite_pion8n;
+
+													image_pion8n.setSmooth(true);
+
+													sprite_pion8n.setTexture(image_pion8n);
+
+													sprite_pion8n.setColor(Color::Black);
+
+													sprite_pion8n.setScale(0.6f, 0.6f);
+
+													sprite_pion8n.setPosition(585, 110);
 													
 													
 													while (Plateaux.isOpen())
@@ -538,6 +810,38 @@ void main(int argc, char **argv)
 														Plateaux.draw(sprite_pion7);
 
 														Plateaux.draw(sprite_pion8);
+
+														Plateaux.draw(sprite_roin);
+
+														Plateaux.draw(sprite_reinen);
+
+														Plateaux.draw(sprite_foun);
+
+														Plateaux.draw(sprite_fou2n);
+
+														Plateaux.draw(sprite_chevaliern);
+
+														Plateaux.draw(sprite_chevalier2n);
+
+														Plateaux.draw(sprite_tourn);
+
+														Plateaux.draw(sprite_tour2n);
+
+														Plateaux.draw(sprite_pionn);
+
+														Plateaux.draw(sprite_pion2n);
+
+														Plateaux.draw(sprite_pion3n);
+
+														Plateaux.draw(sprite_pion4n);
+
+														Plateaux.draw(sprite_pion5n);
+
+														Plateaux.draw(sprite_pion6n);
+
+														Plateaux.draw(sprite_pion7n);
+
+														Plateaux.draw(sprite_pion8n);
 
 														Plateaux.display();
 

@@ -15,7 +15,7 @@ c:\users\charles\documents\github\projet-echec\main.cpp(206): warning C4244: 'ar
           [
               T=unsigned int
           ]
-c:\users\charles\documents\github\projet-echec\main.cpp(612): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(916): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
@@ -23,6 +23,6 @@ c:\users\charles\documents\github\projet-echec\main.cpp(612): warning C4244: 'ar
   Génération de code en cours
   1 of 81 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
   TemplateSFML.vcxproj -> C:\Users\Charles\Documents\GitHub\Projet-Echec\x64\Release\TemplateSFML.exe
