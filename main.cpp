@@ -12,6 +12,7 @@ void main(int argc, char **argv)
 
 
 	RenderWindow window(sf::VideoMode(960, 720), "Echecs", Style::Default);
+	window.setFramerateLimit(60);
 
 	Menu menu(window.getSize().x, window.getSize().y);
 
@@ -78,6 +79,7 @@ void main(int argc, char **argv)
 				if (event.key.code == Keyboard::Return)
 				{
 					RenderWindow Play(VideoMode(960, 720), "Echecs");
+					Play.setFramerateLimit(60);
 
 					AfficheNP AfficheNP(Play.getSize().x, Play.getSize().y);
 					RenderWindow Instructions(VideoMode(960, 720), "Instructions");
@@ -199,6 +201,7 @@ void main(int argc, char **argv)
 						{
 							window.close();
 							RenderWindow Play(VideoMode(960, 720), "Echecs");
+							Play.setFramerateLimit(60);
 
 							AfficheNP AfficheNP(Play.getSize().x, Play.getSize().y);
 
@@ -229,6 +232,9 @@ void main(int argc, char **argv)
 													
 													Play.close();
 													RenderWindow Plateaux(VideoMode(960, 720), "Plateau");
+													Plateaux.setFramerateLimit(30);
+
+													// Affichage Plateau
 
 													Texture image;
 
@@ -239,6 +245,129 @@ void main(int argc, char **argv)
 													sprite.setTexture(image);
 
 													sprite.setScale(1.4f, 1.4f);
+
+													//Affichage pion roi
+
+													Texture image_roi;
+
+													image_roi.loadFromFile("./donnees/king.png");
+
+													Sprite sprite_roi;
+
+													image_roi.setSmooth(true);
+
+													sprite_roi.setTexture(image_roi);
+
+													sprite_roi.setScale(0.6f, 0.6f);
+
+													sprite_roi.setPosition(350, 580);
+
+													//Affichage pion reine
+
+													Texture image_reine;
+
+													image_reine.loadFromFile("./donnees/queen.png");
+
+													Sprite sprite_reine;
+
+													image_reine.setSmooth(true);
+
+													sprite_reine.setTexture(image_reine);
+
+													sprite_reine.setScale(0.6f, 0.6f);
+
+													sprite_reine.setPosition(270, 580);
+
+													//Affichage des pions fou 
+
+													Texture image_fou;
+
+													image_fou.loadFromFile("./donnees/fou.png");
+
+													Sprite sprite_fou;
+
+													image_fou.setSmooth(true);
+
+													sprite_fou.setTexture(image_fou);
+
+													sprite_fou.setScale(0.6f, 0.6f);
+
+													sprite_fou.setPosition(190, 580);
+
+													Texture image_fou2;
+
+													image_fou2.loadFromFile("./donnees/fou.png");
+
+													Sprite sprite_fou2;
+
+													image_fou.setSmooth(true);
+
+													sprite_fou2.setTexture(image_fou2);
+
+													sprite_fou2.setScale(0.6f, 0.6f);
+
+													sprite_fou2.setPosition(425, 580);
+
+													//Affichage des pions chevaliers
+
+													Texture image_chavalier;
+
+													image_chavalier.loadFromFile("./donnees/knight.png");
+
+													Sprite sprite_chevalier;
+
+													image_chavalier.setSmooth(true);
+
+													sprite_chevalier.setTexture(image_chavalier);
+
+													sprite_chevalier.setScale(0.6f, 0.6f);
+
+													sprite_chevalier.setPosition(110, 580);
+
+													Texture image_chevalier2;
+
+													image_chevalier2.loadFromFile("./donnees/knight.png");
+
+													Sprite sprite_chevalier2;
+
+													image_chevalier2.setSmooth(true);
+
+													sprite_chevalier2.setTexture(image_chevalier2);
+
+													sprite_chevalier2.setScale(0.6f, 0.6f);
+
+													sprite_chevalier2.setPosition(505, 580);
+
+													//Affichage des pions tours
+
+													Texture image_tour;
+
+													image_tour.loadFromFile("./donnees/rook.png");
+
+													Sprite sprite_tour;
+
+													image_tour.setSmooth(true);
+
+													sprite_tour.setTexture(image_tour);
+
+													sprite_tour.setScale(0.6f, 0.6f);
+
+													sprite_tour.setPosition(30, 580);
+
+													Texture image_tour2;
+
+													image_tour2.loadFromFile("./donnees/rook.png");
+
+													Sprite sprite_tour2;
+
+													image_tour2.setSmooth(true);
+
+													sprite_tour2.setTexture(image_tour2);
+
+													sprite_tour2.setScale(0.6f, 0.6f);
+
+													sprite_tour2.setPosition(585, 580);
+													
 													
 													while (Plateaux.isOpen())
 													{
@@ -263,6 +392,22 @@ void main(int argc, char **argv)
 
 
 														Plateaux.draw(sprite);
+
+														Plateaux.draw(sprite_roi);
+
+														Plateaux.draw(sprite_reine);
+
+														Plateaux.draw(sprite_fou);
+
+														Plateaux.draw(sprite_fou2);
+
+														Plateaux.draw(sprite_chevalier);
+
+														Plateaux.draw(sprite_chevalier2);
+
+														Plateaux.draw(sprite_tour);
+
+														Plateaux.draw(sprite_tour2);
 
 														Plateaux.display();
 

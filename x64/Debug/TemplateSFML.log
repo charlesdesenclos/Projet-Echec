@@ -1,21 +1,21 @@
 ﻿  main.cpp
 c:\users\charles\documents\github\projet-echec\main.cpp(11): warning C4326: le type de retour de 'main' doit être 'int' au lieu de 'void'
-c:\users\charles\documents\github\projet-echec\main.cpp(16): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(17): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\charles\documents\github\projet-echec\main.cpp(82): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(84): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\charles\documents\github\projet-echec\main.cpp(203): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(206): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\charles\documents\github\projet-echec\main.cpp(337): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(481): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
