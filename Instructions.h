@@ -6,7 +6,7 @@ using namespace std;
 using namespace sf;
 
 
-#define Max_main_menu 4
+#define Max_main_menu 10
 
 
 class Instructions
