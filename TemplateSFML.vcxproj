@@ -131,18 +131,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AfficheNP.cpp" />
+    <ClCompile Include="Decor.cpp" />
     <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="pion.cpp" />
     <ClCompile Include="Plateau.cpp" />
     <ClCompile Include="ServeuxJeuxEchecs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AfficheNP.h" />
+    <ClInclude Include="Decor.h" />
     <ClInclude Include="Instructions.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="pion.h" />
     <ClInclude Include="Plateau.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

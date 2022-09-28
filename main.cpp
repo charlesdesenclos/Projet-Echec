@@ -222,8 +222,10 @@ void main(int argc, char **argv)
 
 									if (aevent.type == Event::MouseButtonPressed)
 									{
+										
 										if (aevent.mouseButton.button == Mouse::Left)
 										{
+											
 											if (aevent.mouseButton.x >= 337 && aevent.mouseButton.y >= 199)
 											{
 												if (aevent.mouseButton.x <= 750 && aevent.mouseButton.y <= 245)
@@ -233,6 +235,8 @@ void main(int argc, char **argv)
 													Play.close();
 													RenderWindow Plateaux(VideoMode(960, 720), "Plateau");
 													Plateaux.setFramerateLimit(30);
+
+													
 
 													// Affichage Plateau
 
@@ -764,12 +768,20 @@ void main(int argc, char **argv)
 
 														
 														
-														Event aevent;
-														while (Plateaux.pollEvent(aevent))
+														Event saevent;
+														while (Plateaux.pollEvent(saevent))
 														{
 															if (aevent.type == Event::Closed)
 															{
 																Plateaux.close();
+															}
+															if (saevent.type == Event::MouseButtonPressed)
+															{
+
+																if (saevent.mouseButton.button == Mouse::Left)
+																{
+																	printf("%d %d\n", saevent.mouseButton.x, saevent.mouseButton.y);
+																}
 															}
 
 														}
