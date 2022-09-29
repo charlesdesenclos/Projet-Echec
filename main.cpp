@@ -5,26 +5,26 @@
 #include "Instructions.h"
 #include "Plateau.h"
 
-#define LUNGIME 8
-#define PionNEGRU 1
-#define PionALB -1
-#define TurnNEGRU 2
-#define TurnALB -2
-#define CalALB -3
-#define CalNEGRU 3
-#define NebunNEGRU 4
-#define NebunALB -4
-#define ReginaALB -5
-#define ReginaNEGRU 5
-#define RegeNEGRU 6
-#define RegeALB -6
+#define LONGUEUR 8
+#define PionNOIR 1
+#define PionBLANC -1
+#define TourNOIR 2
+#define TourBlanche -2
+#define ChevalierBlanc -3
+#define ChevalierNoir 3
+#define FouNOIR 4
+#define FouBLANC -4
+#define ReineBLANCHE -5
+#define ReineNOIRE 5
+#define RoiNOIRE 6
+#define RoiBLANC -6
 
 using namespace sf;
 
 struct poz
 {
 	int x, y;
-}oldPoz, regeleAlb, regeleNegru, transformA, transformN;
+}ancienPos, roiBlanc, roiNoir, transformA, transformN;
 
 int  taille = 100, mouvement = 0, x, y;
 int board[8][8] =
@@ -37,19 +37,19 @@ int board[8][8] =
  -1,-1,-1,-1,-1,-1,-1,-1,
  -2,-3,-4,-5,-6,-4,-3,-2, };
 
-int turnAlbDreapta = 0, turnAlbStanga = 0, regeAlb = 0;
-int turnNegruDreapta = 0, turnNegruStanga = 0, regeNegru = 0;
+int tourBlancDroit = 0, tourBlancGauche = 0, roiBLC = 0;
+int tourNoirDroit = 0, tourNoirGauche = 0, roiNR = 0;
 
 int mutare = 0; // 0 déplace le blanc, 1 déplace le noir
 
 int sahAlb = 0, sahNegru = 0;
 
-int transformareAlb = 0, transformareNegru = 0;
+int transformationBlanc = 0, transformationNoir = 0;
 
 
 int PionA(int ox, int oy, int nx, int ny)
 {
-	if (oldPoz.y == 6)
+	if (ancienPos.y == 6)
 	{
 		if ((ny == oy - 1 && nx == ox && board[oy - 1][ox] == 0) || (ny == oy - 2 && nx == ox && board[oy - 1][ox] == 0 && board[oy - 2][ox] == 0))
 		{
@@ -79,7 +79,7 @@ int PionA(int ox, int oy, int nx, int ny)
 
 int PionN(int ox, int oy, int nx, int ny)
 {
-	if (oldPoz.y == 1)
+	if (ancienPos.y == 1)
 	{
 		if ((ny == oy + 1 && nx == ox && board[oy + 1][ox] == 0) || (ny == oy + 2 && nx == ox && board[oy + 1][ox] == 0 && board[oy + 2][ox] == 0))
 		{
@@ -527,27 +527,27 @@ int CalA(int ox, int oy, int nx, int ny)
 	{
 		return 1; // en haut à gauche
 	}
-	if (oy - 2 >= 0 && ox + 1 < LUNGIME && ny == oy - 2 && nx == ox + 1 && board[ny][nx] >= 0)
+	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && ny == oy - 2 && nx == ox + 1 && board[ny][nx] >= 0)
 	{
 		return 1; // En haut à droite
 	}
-	if (oy - 1 >= 0 && ox + 2 < LUNGIME && ny == oy - 1 && nx == ox + 2 && board[ny][nx] >= 0)
+	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && ny == oy - 1 && nx == ox + 2 && board[ny][nx] >= 0)
 	{
 		return 1; // droite 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LUNGIME && ny == oy + 1 && nx == ox + 2 && board[ny][nx] >= 0)
+	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && ny == oy + 1 && nx == ox + 2 && board[ny][nx] >= 0)
 	{
 		return 1; // droite 2
 	}
-	if (oy + 2 < LUNGIME && ox + 1 < LUNGIME && ny == oy + 2 && nx == ox + 1 && board[ny][nx] >= 0)
+	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && ny == oy + 2 && nx == ox + 1 && board[ny][nx] >= 0)
 	{
 		return 1; // vers le bas 1
 	}
-	if (oy + 2 < LUNGIME && ox - 1 >= 0 && ny == oy + 2 && nx == ox - 1 && board[ny][nx] >= 0)
+	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && ny == oy + 2 && nx == ox - 1 && board[ny][nx] >= 0)
 	{
 		return 1; //vers le bas 2
 	}
-	if (oy + 1 < LUNGIME && ox - 2 >= 0 && ny == oy + 1 && nx == ox - 2 && board[ny][nx] >= 0)
+	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && ny == oy + 1 && nx == ox - 2 && board[ny][nx] >= 0)
 	{
 		return 1; // gauche 1
 	}
@@ -564,27 +564,27 @@ int CalN(int ox, int oy, int nx, int ny)
 	{
 		return 1; // en haut à gauche
 	}
-	if (oy - 2 >= 0 && ox + 1 < LUNGIME && ny == oy - 2 && nx == ox + 1 && board[ny][nx] <= 0)
+	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && ny == oy - 2 && nx == ox + 1 && board[ny][nx] <= 0)
 	{
 		return 1; // En haut à droite
 	}
-	if (oy - 1 >= 0 && ox + 2 < LUNGIME && ny == oy - 1 && nx == ox + 2 && board[ny][nx] <= 0)
+	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && ny == oy - 1 && nx == ox + 2 && board[ny][nx] <= 0)
 	{
 		return 1; // droite 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LUNGIME && ny == oy + 1 && nx == ox + 2 && board[ny][nx] <= 0)
+	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && ny == oy + 1 && nx == ox + 2 && board[ny][nx] <= 0)
 	{
 		return 1; // droite 2
 	}
-	if (oy + 2 < LUNGIME && ox + 1 < LUNGIME && ny == oy + 2 && nx == ox + 1 && board[ny][nx] <= 0)
+	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && ny == oy + 2 && nx == ox + 1 && board[ny][nx] <= 0)
 	{
 		return 1; // vers le bas 1
 	}
-	if (oy + 2 < LUNGIME && ox - 1 >= 0 && ny == oy + 2 && nx == ox - 1 && board[ny][nx] <= 0)
+	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && ny == oy + 2 && nx == ox - 1 && board[ny][nx] <= 0)
 	{
 		return 1; //jos 2
 	}
-	if (oy + 1 < LUNGIME && ox - 2 >= 0 && ny == oy + 1 && nx == ox - 2 && board[ny][nx] <= 0)
+	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && ny == oy + 1 && nx == ox - 2 && board[ny][nx] <= 0)
 	{
 		return 1; // gauche 1
 	}
@@ -641,7 +641,7 @@ int TurnASah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = ox + 1; i < LUNGIME; i++) // À droite
+	for (int i = ox + 1; i < LONGUEUR; i++) // À droite
 	{
 		if (board[oy][i] >= 0 && (regey == oy && regex == i))
 		{
@@ -652,7 +652,7 @@ int TurnASah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = oy + 1; i < LUNGIME; i++) // vers le bas
+	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
 		if (board[i][ox] >= 0 && (regey == i && regex == ox))
 		{
@@ -747,7 +747,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = ox + 1; i < LUNGIME; i++) //À droite
+	for (int i = ox + 1; i < LONGUEUR; i++) //À droite
 	{
 		if (board[oy][i] >= 0 && (regey == oy && regex == i))
 		{
@@ -758,7 +758,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = oy + 1; i < LUNGIME; i++) // vers le bas
+	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
 		if (board[i][ox] >= 0 && (regey == i && regex == ox))
 		{
@@ -809,7 +809,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 		j--;
 	}
 	j = ox + 1;
-	for (int i = oy + 1; i < LUNGIME; i++)  // en bas à droite
+	for (int i = oy + 1; i < LONGUEUR; i++)  // en bas à droite
 	{
 		if (board[i][j] >= 0 && (regey == i && regex == j))
 		{
@@ -830,27 +830,27 @@ int CalASah(int ox, int oy, int regex, int regey)
 	{
 		return 1; // en haut à gauche
 	}
-	if (oy - 2 >= 0 && ox + 1 < LUNGIME && regey == oy - 2 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && regey == oy - 2 && regex == ox + 1 && board[regey][regex] >= 0)
 	{
 		return 1; // En haut à droite
 	}
-	if (oy - 1 >= 0 && ox + 2 < LUNGIME && regey == oy - 1 && regex == ox + 2 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && regey == oy - 1 && regex == ox + 2 && board[regey][regex] >= 0)
 	{
 		return 1; // droite 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LUNGIME && regey == oy + 1 && regex == ox + 2 && board[regey][regex] >= 0)
+	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && regey == oy + 1 && regex == ox + 2 && board[regey][regex] >= 0)
 	{
 		return 1; // droite 2
 	}
-	if (oy + 2 < LUNGIME && ox + 1 < LUNGIME && regey == oy + 2 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && regey == oy + 2 && regex == ox + 1 && board[regey][regex] >= 0)
 	{
 		return 1; // vers le bas 1
 	}
-	if (oy + 2 < LUNGIME && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] >= 0)
+	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] >= 0)
 	{
 		return 1; //vers le bas 2
 	}
-	if (oy + 1 < LUNGIME && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] >= 0)
+	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] >= 0)
 	{
 		return 1; // gauche 1
 	}
@@ -871,23 +871,23 @@ int RegeASah(int ox, int oy, int regex, int regey)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && ox + 1 < LUNGIME && regex == ox + 1 && regey == oy - 1 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && regex == ox + 1 && regey == oy - 1 && board[regey][regex] <= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LUNGIME && regey == oy && regex == ox + 1 && board[regey][regex] <= 0)
+	if (ox + 1 < LONGUEUR && regey == oy && regex == ox + 1 && board[regey][regex] <= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LUNGIME && oy + 1 < LUNGIME && regey == oy + 1 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox + 1 && board[regey][regex] <= 0)
 	{
 		return 1;
 	}
-	if (oy + 1 < LUNGIME && regey == oy + 1 && regex == ox && board[regey][regex] <= 0)
+	if (oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox && board[regey][regex] <= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && oy + 1 < LUNGIME && regex == ox - 1 && regey == oy + 1 && board[regey][regex] <= 0)
+	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && regex == ox - 1 && regey == oy + 1 && board[regey][regex] <= 0)
 	{
 		return 1;
 	}
@@ -942,7 +942,7 @@ int TurnNSah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = ox + 1; i < LUNGIME; i++) // À droite
+	for (int i = ox + 1; i < LONGUEUR; i++) // À droite
 	{
 		if (board[oy][i] <= 0 && (regey == oy && regex == i))
 		{
@@ -953,7 +953,7 @@ int TurnNSah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = oy + 1; i < LUNGIME; i++) // vers le bas
+	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
 		if (board[i][ox] <= 0 && (regey == i && regex == ox))
 		{
@@ -1048,7 +1048,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = ox + 1; i < LUNGIME; i++) //À droite
+	for (int i = ox + 1; i < LONGUEUR; i++) //À droite
 	{
 		if (board[oy][i] <= 0 && (regey == oy && regex == i))
 		{
@@ -1059,7 +1059,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 			break;
 		}
 	}
-	for (int i = oy + 1; i < LUNGIME; i++) // vers le bas
+	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
 		if (board[i][ox] <= 0 && (regey == i && regex == ox))
 		{
@@ -1110,7 +1110,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 		j--;
 	}
 	j = ox + 1;
-	for (int i = oy + 1; i < LUNGIME; i++)  //en bas à droite
+	for (int i = oy + 1; i < LONGUEUR; i++)  //en bas à droite
 	{
 		if (board[i][j] <= 0 && (regey == i && regex == j))
 		{
@@ -1131,27 +1131,27 @@ int CalNSah(int ox, int oy, int regex, int regey)
 	{
 		return 1; // en haut à gauche
 	}
-	if (oy - 2 >= 0 && ox + 1 < LUNGIME && regey == oy - 2 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && regey == oy - 2 && regex == ox + 1 && board[regey][regex] <= 0)
 	{
 		return 1; // En haut à droite
 	}
-	if (oy - 1 >= 0 && ox + 2 < LUNGIME && regey == oy - 1 && regex == ox + 2 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && regey == oy - 1 && regex == ox + 2 && board[regey][regex] <= 0)
 	{
 		return 1; // droite 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LUNGIME && regey == oy + 1 && regex == ox + 2 && board[regey][regex] <= 0)
+	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && regey == oy + 1 && regex == ox + 2 && board[regey][regex] <= 0)
 	{
 		return 1; // droite 2
 	}
-	if (oy + 2 < LUNGIME && ox + 1 < LUNGIME && regey == oy + 2 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && regey == oy + 2 && regex == ox + 1 && board[regey][regex] <= 0)
 	{
 		return 1; // vers le bas 1
 	}
-	if (oy + 2 < LUNGIME && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] <= 0)
+	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] <= 0)
 	{
 		return 1; //vers le bas 2
 	}
-	if (oy + 1 < LUNGIME && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] <= 0)
+	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] <= 0)
 	{
 		return 1; // gauche 1
 	}
@@ -1172,23 +1172,23 @@ int RegeNSah(int ox, int oy, int regex, int regey)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && ox + 1 < LUNGIME && regex == ox + 1 && regey == oy - 1 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && regex == ox + 1 && regey == oy - 1 && board[regey][regex] >= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LUNGIME && regey == oy && regex == ox + 1 && board[regey][regex] >= 0)
+	if (ox + 1 < LONGUEUR && regey == oy && regex == ox + 1 && board[regey][regex] >= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LUNGIME && oy + 1 < LUNGIME && regey == oy + 1 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox + 1 && board[regey][regex] >= 0)
 	{
 		return 1;
 	}
-	if (oy + 1 < LUNGIME && regey == oy + 1 && regex == ox && board[regey][regex] >= 0)
+	if (oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox && board[regey][regex] >= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && oy + 1 < LUNGIME && regex == ox - 1 && regey == oy + 1 && board[regey][regex] >= 0)
+	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && regex == ox - 1 && regey == oy + 1 && board[regey][regex] >= 0)
 	{
 		return 1;
 	}
@@ -1204,33 +1204,33 @@ int RegeNSah(int ox, int oy, int regex, int regey)
 int RegeNegruSahCheck(int posRegex, int posRegey)
 {
 	int ok = 0;
-	for (int i = 0; i < LUNGIME; i++)
+	for (int i = 0; i < LONGUEUR; i++)
 	{
-		for (int j = 0; j < LUNGIME; j++)
+		for (int j = 0; j < LONGUEUR; j++)
 		{
 			if (board[i][j] < 0)
 			{
-				if (board[i][j] == PionALB)
+				if (board[i][j] == PionBLANC)
 				{
 					ok = PionASah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == TurnALB)
+				if (board[i][j] == TourBlanche)
 				{
 					ok = TurnASah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == CalALB)
+				if (board[i][j] == ChevalierBlanc)
 				{
 					ok = CalASah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == NebunALB)
+				if (board[i][j] == FouBLANC)
 				{
 					ok = NebunASah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == ReginaALB)
+				if (board[i][j] == ReineBLANCHE)
 				{
 					ok = ReginaASah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == RegeALB)
+				if (board[i][j] == RoiBLANC)
 				{
 					ok = RegeASah(j, i, posRegex, posRegey);
 				}
@@ -1262,7 +1262,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 			return 1; // en haut
 		}
 	}
-	if (oy - 1 >= 0 && ox + 1 < LUNGIME && nx == ox + 1 && ny == oy - 1 && board[ny][nx] <= 0)
+	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && nx == ox + 1 && ny == oy - 1 && board[ny][nx] <= 0)
 	{
 		int ok = RegeNegruSahCheck(ox + 1, oy - 1);
 		if (ok == 1)
@@ -1270,7 +1270,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 			return 1; // En haut à droite
 		}
 	}
-	if (ox + 1 < LUNGIME && ny == oy && nx == ox + 1 && board[ny][nx] <= 0)
+	if (ox + 1 < LONGUEUR && ny == oy && nx == ox + 1 && board[ny][nx] <= 0)
 	{
 		int ok = RegeNegruSahCheck(ox + 1, oy);
 		if (ok == 1)
@@ -1278,7 +1278,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 			return 1; // droit
 		}
 	}
-	if (ox + 1 < LUNGIME && oy + 1 < LUNGIME && ny == oy + 1 && nx == ox + 1 && board[ny][nx] <= 0)
+	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox + 1 && board[ny][nx] <= 0)
 	{
 		int ok = RegeNegruSahCheck(ox + 1, oy + 1);
 		if (ok == 1)
@@ -1286,7 +1286,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 			return 1; // en bas à droite
 		}
 	}
-	if (oy + 1 < LUNGIME && ny == oy + 1 && nx == ox && board[ny][nx] <= 0)
+	if (oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox && board[ny][nx] <= 0)
 	{
 		int ok = RegeNegruSahCheck(ox, oy + 1);
 		if (ok == 1)
@@ -1294,7 +1294,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 			return 1; // vers le bas
 		}
 	}
-	if (ox - 1 >= 0 && oy + 1 < LUNGIME && nx == ox - 1 && ny == oy + 1 && board[ny][nx] <= 0)
+	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && nx == ox - 1 && ny == oy + 1 && board[ny][nx] <= 0)
 	{
 		int ok = RegeNegruSahCheck(ox - 1, oy + 1);
 		if (ok == 1)
@@ -1311,7 +1311,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 		}
 	}
 	// point à droite
-	if (turnNegruDreapta == 0 && regeNegru == 0 && board[0][5] == 0 && board[0][6] == 0 && ny == 0 && nx == 6)
+	if (tourNoirDroit == 0 && roiNR == 0 && board[0][5] == 0 && board[0][6] == 0 && ny == 0 && nx == 6)
 	{
 		int ok = RegeNegruSahCheck(4, 0);
 		if (ok == 1)
@@ -1322,16 +1322,16 @@ int RegeN(int ox, int oy, int nx, int ny)
 				ok = RegeNegruSahCheck(6, 0);
 				if (ok == 1)
 				{
-					regeNegru = 1;
-					turnNegruDreapta = 1;
+					roiNR = 1;
+					tourNoirDroit = 1;
 					board[0][7] = 0;
-					board[0][5] = TurnNEGRU;
+					board[0][5] = TourNOIR;
 					return 1;
 				}
 			}
 		}
 	}
-	if (turnNegruStanga == 0 && regeNegru == 0 && board[0][3] == 0 && board[0][2] == 0 && board[0][1] == 0 && ny == 0 && nx == 2)
+	if (tourNoirGauche == 0 && roiNR == 0 && board[0][3] == 0 && board[0][2] == 0 && board[0][1] == 0 && ny == 0 && nx == 2)
 	{
 		int ok = RegeNegruSahCheck(4, 0);
 		if (ok == 1)
@@ -1345,10 +1345,10 @@ int RegeN(int ox, int oy, int nx, int ny)
 					ok = RegeNegruSahCheck(1, 0);
 					if (ok == 1)
 					{
-						regeNegru = 1;
-						turnNegruStanga = 1;
+						roiNR = 1;
+						tourNoirGauche = 1;
 						board[0][0] = 0;
-						board[0][3] = TurnNEGRU;
+						board[0][3] = TourNOIR;
 						return 1;
 					}
 				}
@@ -1362,33 +1362,33 @@ int RegeN(int ox, int oy, int nx, int ny)
 int RegeAlbSahCheck(int posRegex, int posRegey)
 {
 	int ok = 0;
-	for (int i = 0; i < LUNGIME; i++)
+	for (int i = 0; i < LONGUEUR; i++)
 	{
-		for (int j = 0; j < LUNGIME; j++)
+		for (int j = 0; j < LONGUEUR; j++)
 		{
 			if (board[i][j] > 0)
 			{
-				if (board[i][j] == PionNEGRU)
+				if (board[i][j] == PionNOIR)
 				{
 					ok = PionNSah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == TurnNEGRU)
+				if (board[i][j] == TourNOIR)
 				{
 					ok = TurnNSah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == CalNEGRU)
+				if (board[i][j] == ChevalierNoir)
 				{
 					ok = CalNSah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == NebunNEGRU)
+				if (board[i][j] == FouNOIR)
 				{
 					ok = NebunNSah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == ReginaNEGRU)
+				if (board[i][j] == ReineNOIRE)
 				{
 					ok = ReginaNSah(j, i, posRegex, posRegey);
 				}
-				if (board[i][j] == RegeNEGRU)
+				if (board[i][j] == RoiNOIRE)
 				{
 					ok = RegeNSah(j, i, posRegex, posRegey);
 				}
@@ -1421,7 +1421,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 			return 1; // en haut
 		}
 	}
-	if (oy - 1 >= 0 && ox + 1 < LUNGIME && nx == ox + 1 && ny == oy - 1 && board[ny][nx] >= 0)
+	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && nx == ox + 1 && ny == oy - 1 && board[ny][nx] >= 0)
 	{
 		int ok = RegeAlbSahCheck(ox + 1, oy - 1);
 		if (ok == 1)
@@ -1429,7 +1429,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 			return 1; // En haut à droite
 		}
 	}
-	if (ox + 1 < LUNGIME && ny == oy && nx == ox + 1 && board[ny][nx] >= 0)
+	if (ox + 1 < LONGUEUR && ny == oy && nx == ox + 1 && board[ny][nx] >= 0)
 	{
 		int ok = RegeAlbSahCheck(ox + 1, oy);
 		if (ok == 1)
@@ -1437,7 +1437,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 			return 1; // droit
 		}
 	}
-	if (ox + 1 < LUNGIME && oy + 1 < LUNGIME && ny == oy + 1 && nx == ox + 1 && board[ny][nx] >= 0)
+	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox + 1 && board[ny][nx] >= 0)
 	{
 		int ok = RegeAlbSahCheck(ox + 1, oy + 1);
 		if (ok == 1)
@@ -1445,7 +1445,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 			return 1; // en bas à droite
 		}
 	}
-	if (oy + 1 < LUNGIME && ny == oy + 1 && nx == ox && board[ny][nx] >= 0)
+	if (oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox && board[ny][nx] >= 0)
 	{
 		int ok = RegeAlbSahCheck(ox, oy + 1);
 		if (ok == 1)
@@ -1453,7 +1453,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 			return 1; // vers le bas
 		}
 	}
-	if (ox - 1 >= 0 && oy + 1 < LUNGIME && nx == ox - 1 && ny == oy + 1 && board[ny][nx] >= 0)
+	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && nx == ox - 1 && ny == oy + 1 && board[ny][nx] >= 0)
 	{
 		int ok = RegeAlbSahCheck(ox - 1, oy + 1);
 		if (ok == 1)
@@ -1470,7 +1470,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 		}
 	}
 	// point à droite
-	if (regeAlb == 0 && turnAlbDreapta == 0 && board[7][5] == 0 && board[7][6] == 0 && ny == 7 && nx == 6)
+	if (roiBLC == 0 && tourBlancDroit == 0 && board[7][5] == 0 && board[7][6] == 0 && ny == 7 && nx == 6)
 	{
 		int ok = 1;
 		ok = RegeAlbSahCheck(4, 7);
@@ -1483,16 +1483,16 @@ int RegeA(int ox, int oy, int nx, int ny)
 				if (ok == 1)
 				{
 					board[7][7] = 0;
-					board[7][5] = TurnALB;
-					regeAlb = 1;
-					turnAlbDreapta = 1;
+					board[7][5] = TourBlanche;
+					roiBLC = 1;
+					tourBlancDroit = 1;
 					return 1;
 				}
 			}
 		}
 	}
 	//	point à droite
-	if (regeAlb == 0 && turnAlbDreapta == 0 && board[7][3] == 0 && board[7][2] == 0 && board[7][1] == 0 && ny == 7 && nx == 2)
+	if (roiBLC == 0 && tourBlancDroit == 0 && board[7][3] == 0 && board[7][2] == 0 && board[7][1] == 0 && ny == 7 && nx == 2)
 	{
 		int ok = 1;
 		ok = RegeAlbSahCheck(4, 7);
@@ -1508,9 +1508,9 @@ int RegeA(int ox, int oy, int nx, int ny)
 					if (ok == 1)
 					{
 						board[7][0] = 0;
-						board[7][3] = TurnALB;
-						regeAlb = 1;
-						turnAlbStanga = 1;
+						board[7][3] = TourBlanche;
+						roiBLC = 1;
+						tourBlancGauche = 1;
 						return 1;
 					}
 				}
@@ -1523,14 +1523,14 @@ int RegeA(int ox, int oy, int nx, int ny)
 
 void pozRegeAlb()
 {
-	for (int i = 0; i < LUNGIME; i++)
+	for (int i = 0; i < LONGUEUR; i++)
 	{
-		for (int j = 0; j < LUNGIME; j++)
+		for (int j = 0; j < LONGUEUR; j++)
 		{
-			if (board[i][j] == RegeALB)
+			if (board[i][j] == RoiBLANC)
 			{
-				regeleAlb.x = j;
-				regeleAlb.y = i;
+				roiBlanc.x = j;
+				roiBlanc.y = i;
 				break;
 			}
 		}
@@ -1539,14 +1539,14 @@ void pozRegeAlb()
 
 void pozRegeNegru()
 {
-	for (int i = 0; i < LUNGIME; i++)
+	for (int i = 0; i < LONGUEUR; i++)
 	{
-		for (int j = 0; j < LUNGIME; j++)
+		for (int j = 0; j < LONGUEUR; j++)
 		{
-			if (board[i][j] == RegeNEGRU)
+			if (board[i][j] == RoiNOIRE)
 			{
-				regeleNegru.y = i;
-				regeleNegru.x = j;
+				roiNoir.y = i;
+				roiNoir.x = j;
 				break;
 			}
 		}
@@ -1845,7 +1845,7 @@ void main(int argc, char **argv)
 
 																if (saevent.mouseButton.button == Mouse::Left)
 																{
-																	if (transformareAlb == 1)
+																	if (transformationBlanc == 1)
 																	{
 																		if (pos.y >= transformA.y * taille && pos.y <= (transformA.y + 1) * taille && pos.x >= transformA.x * taille && pos.x <= (transformA.x + 1) * taille)
 																		{
@@ -1853,28 +1853,28 @@ void main(int argc, char **argv)
 
 																			if (xx < 50 && yy < 50 && xx > 0 && yy > 0)
 																			{
-																				board[transformA.y][transformA.x] = TurnALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = TourBlanche;
+																				transformationBlanc = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy < 50 && yy > 0)
 																			{
-																				board[transformA.y][transformA.x] = ReginaALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = ReineBLANCHE;
+																				transformationBlanc = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy>50 && yy < 100)
 																			{
-																				board[transformA.y][transformA.x] = CalALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = ChevalierBlanc;
+																				transformationBlanc = 0;
 																			}
 																			if (xx < 50 && xx>0 && yy > 50 && y < 100)
 																			{
-																				board[transformA.y][transformA.x] = NebunALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = FouBLANC;
+																				transformationBlanc = 0;
 																			}
-																			if (transformareAlb == 0)
+																			if (transformationBlanc == 0)
 																			{
 																				pozRegeNegru();
-																				int h = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																				int h = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (h == 0)
 																				{
 																					sahNegru = 1;
@@ -1882,7 +1882,7 @@ void main(int argc, char **argv)
 																			}
 																		}
 																	}
-																	if (transformareNegru == 1)
+																	if (transformationNoir == 1)
 																	{
 																		if (pos.y >= transformN.y * taille && pos.y <= (transformN.y + 1) * taille && pos.x >= transformN.x * taille && pos.x <= (transformN.x + 1) * taille)
 																		{
@@ -1890,28 +1890,28 @@ void main(int argc, char **argv)
 
 																			if (xx < 50 && yy < 50 && xx > 0 && yy > 0)
 																			{
-																				board[transformN.y][transformN.x] = TurnNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = TourNOIR;
+																				transformationNoir = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy < 50 && yy > 0)
 																			{
-																				board[transformN.y][transformN.x] = ReginaNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = ReineNOIRE;
+																				transformationNoir = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy>50 && yy < 100)
 																			{
-																				board[transformN.y][transformN.x] = CalNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = ChevalierNoir;
+																				transformationNoir = 0;
 																			}
 																			if (xx < 50 && xx>0 && yy > 50 && y < 100)
 																			{
-																				board[transformN.y][transformN.x] = NebunNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = FouNOIR;
+																				transformationNoir = 0;
 																			}
-																			if (transformareNegru == 0)
+																			if (transformationNoir == 0)
 																			{
 																				pozRegeAlb();
-																				int h = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																				int h = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (h == 0)
 																				{
 																					sahAlb = 1;
@@ -1923,85 +1923,85 @@ void main(int argc, char **argv)
 																	{
 																		dx = pos.x - x * 100;
 																		dy = pos.y - y * 100;
-																		if (board[y][x] == PionNEGRU && mutare == 1)
+																		if (board[y][x] == PionNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = PionNEGRU;
+																			numarPiesaMutata = PionNOIR;
 																			Mutare = PionNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == PionALB && mutare == 0)
+																		if (board[y][x] == PionBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = PionALB;
+																			numarPiesaMutata = PionBLANC;
 																			Mutare = PionAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == TurnNEGRU && mutare == 1)
+																		if (board[y][x] == TourNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = TurnNEGRU;
+																			numarPiesaMutata = TourNOIR;
 																			Mutare = TurnNegru;
 																			board[y][x] = 0;
 
 																		}
-																		if (board[y][x] == TurnALB && mutare == 0)
+																		if (board[y][x] == TourBlanche && mutare == 0)
 																		{
-																			numarPiesaMutata = TurnALB;
+																			numarPiesaMutata = TourBlanche;
 																			Mutare = TurnAlb;
 																			board[y][x] = 0;
 
 																		}
-																		if (board[y][x] == CalALB && mutare == 0)
+																		if (board[y][x] == ChevalierBlanc && mutare == 0)
 																		{
-																			numarPiesaMutata = CalALB;
+																			numarPiesaMutata = ChevalierBlanc;
 																			Mutare = CalAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == CalNEGRU && mutare == 1)
+																		if (board[y][x] == ChevalierNoir && mutare == 1)
 																		{
-																			numarPiesaMutata = CalNEGRU;
+																			numarPiesaMutata = ChevalierNoir;
 																			Mutare = CalNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == NebunNEGRU && mutare == 1)
+																		if (board[y][x] == FouNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = NebunNEGRU;
+																			numarPiesaMutata = FouNOIR;
 																			Mutare = NebunNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == NebunALB && mutare == 0)
+																		if (board[y][x] == FouBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = NebunALB;
+																			numarPiesaMutata = FouBLANC;
 																			Mutare = NebunAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == ReginaALB && mutare == 0)
+																		if (board[y][x] == ReineBLANCHE && mutare == 0)
 																		{
-																			numarPiesaMutata = ReginaALB;
+																			numarPiesaMutata = ReineBLANCHE;
 																			Mutare = ReginaAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == ReginaNEGRU && mutare == 1)
+																		if (board[y][x] == ReineNOIRE && mutare == 1)
 																		{
-																			numarPiesaMutata = ReginaNEGRU;
+																			numarPiesaMutata = ReineNOIRE;
 																			Mutare = ReginaNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == RegeNEGRU && mutare == 1)
+																		if (board[y][x] == RoiNOIRE && mutare == 1)
 																		{
-																			numarPiesaMutata = RegeNEGRU;
+																			numarPiesaMutata = RoiNOIRE;
 																			Mutare = RegeNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == RegeALB && mutare == 0)
+																		if (board[y][x] == RoiBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = RegeALB;
+																			numarPiesaMutata = RoiBLANC;
 																			Mutare = RegeAlb;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == 0)
 																		{
 																			mouvement = 1;
-																			oldPoz.x = x;
-																			oldPoz.y = y;
+																			ancienPos.x = x;
+																			ancienPos.y = y;
 																		}
 																	}
 																}
@@ -2012,81 +2012,81 @@ void main(int argc, char **argv)
 																if (saevent.key.code == Mouse::Left)
 																{
 																	int ok = 2;
-																	if (numarPiesaMutata == PionALB && mouvement == 1)
+																	if (numarPiesaMutata == PionBLANC && mouvement == 1)
 																	{
-																		ok = PionA(oldPoz.x, oldPoz.y, x, y);
+																		ok = PionA(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == PionNEGRU && mouvement == 1)
+																	if (numarPiesaMutata == PionNOIR && mouvement == 1)
 																	{
-																		ok = PionN(oldPoz.x, oldPoz.y, x, y);
+																		ok = PionN(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == TurnALB && mouvement == 1)
+																	if (numarPiesaMutata == TourBlanche && mouvement == 1)
 																	{
-																		ok = TurnA(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && turnAlbStanga == 0 && oldPoz.y == 7 && oldPoz.x == 0)
+																		ok = TurnA(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && tourBlancGauche == 0 && ancienPos.y == 7 && ancienPos.x == 0)
 																		{
-																			turnAlbStanga = 1;
+																			tourBlancGauche = 1;
 
 																		}
-																		if (ok == 1 && turnAlbDreapta == 0 && oldPoz.y == 7 && oldPoz.x == 7)
+																		if (ok == 1 && tourBlancDroit == 0 && ancienPos.y == 7 && ancienPos.x == 7)
 																		{
-																			turnAlbDreapta = 1;
-
-																		}
-																	}
-																	if (numarPiesaMutata == TurnNEGRU && mouvement == 1)
-																	{
-																		ok = TurnN(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && turnNegruDreapta == 0 && oldPoz.y == 0 && oldPoz.x == 7)
-																		{
-																			turnNegruDreapta = 1;
-
-																		}
-																		if (ok == 1 && turnNegruStanga == 0 && oldPoz.y == 0 && oldPoz.x == 0)
-																		{
-																			turnNegruStanga = 1;
+																			tourBlancDroit = 1;
 
 																		}
 																	}
-																	if (numarPiesaMutata == NebunALB && mouvement == 1)
+																	if (numarPiesaMutata == TourNOIR && mouvement == 1)
 																	{
-																		ok = NebunA(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == NebunNEGRU && mouvement == 1)
-																	{
-																		ok = NebunN(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == ReginaALB && mouvement == 1)
-																	{
-																		ok = ReginaA(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == ReginaNEGRU && mouvement == 1)
-																	{
-																		ok = ReginaN(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == CalALB && mouvement == 1)
-																	{
-																		ok = CalA(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == CalNEGRU && mouvement == 1)
-																	{
-																		ok = CalN(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == RegeNEGRU && mouvement == 1)
-																	{
-																		ok = RegeN(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && regeNegru == 0)
+																		ok = TurnN(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && tourNoirDroit == 0 && ancienPos.y == 0 && ancienPos.x == 7)
 																		{
-																			regeNegru = 1;
+																			tourNoirDroit = 1;
+
+																		}
+																		if (ok == 1 && tourNoirGauche == 0 && ancienPos.y == 0 && ancienPos.x == 0)
+																		{
+																			tourNoirGauche = 1;
 
 																		}
 																	}
-																	if (numarPiesaMutata == RegeALB && mouvement == 1)
+																	if (numarPiesaMutata == FouBLANC && mouvement == 1)
 																	{
-																		ok = RegeA(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && regeAlb == 0)
+																		ok = NebunA(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == FouNOIR && mouvement == 1)
+																	{
+																		ok = NebunN(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ReineBLANCHE && mouvement == 1)
+																	{
+																		ok = ReginaA(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ReineNOIRE && mouvement == 1)
+																	{
+																		ok = ReginaN(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ChevalierBlanc && mouvement == 1)
+																	{
+																		ok = CalA(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ChevalierNoir && mouvement == 1)
+																	{
+																		ok = CalN(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == RoiNOIRE && mouvement == 1)
+																	{
+																		ok = RegeN(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && roiNR == 0)
 																		{
-																			regeAlb = 1;
+																			roiNR = 1;
+
+																		}
+																	}
+																	if (numarPiesaMutata == RoiBLANC && mouvement == 1)
+																	{
+																		ok = RegeA(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && roiBLC == 0)
+																		{
+																			roiBLC = 1;
 
 																		}
 																	}
@@ -2094,16 +2094,16 @@ void main(int argc, char **argv)
 																	{
 																		int nr = board[y][x];
 																		board[y][x] = numarPiesaMutata;
-																		if (y == 0 && numarPiesaMutata == PionALB)
+																		if (y == 0 && numarPiesaMutata == PionBLANC)
 																		{
-																			transformareAlb = 1;
+																			transformationBlanc = 1;
 																			transformA.x = x;
 																			transformA.y = y;
 																			board[y][x] = 0;
 																		}
-																		if (y == 7 && numarPiesaMutata == PionNEGRU)
+																		if (y == 7 && numarPiesaMutata == PionNOIR)
 																		{
-																			transformareNegru = 1;
+																			transformationNoir = 1;
 																			transformN.x = x;
 																			transformN.y = y;
 																			board[y][x] = 0;
@@ -2113,17 +2113,17 @@ void main(int argc, char **argv)
 																			if (sahAlb == 1)
 																			{
 																				pozRegeAlb();
-																				int s = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																				int s = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (s == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					sahAlb = 0;
 																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2134,16 +2134,16 @@ void main(int argc, char **argv)
 																			else
 																			{
 																				pozRegeAlb();
-																				int sa = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																				int sa = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (sa == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2157,17 +2157,17 @@ void main(int argc, char **argv)
 																			if (sahNegru == 1)
 																			{
 																				pozRegeNegru();
-																				int s = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																				int s = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (s == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					sahNegru = 0;
 																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
 																						sahAlb = 1;
@@ -2178,16 +2178,16 @@ void main(int argc, char **argv)
 																			else
 																			{
 																				pozRegeNegru();
-																				int sa = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																				int sa = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (sa == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
 																						sahAlb = 1;
@@ -2199,7 +2199,7 @@ void main(int argc, char **argv)
 																	}
 																	else if (ok == 0)
 																	{
-																		board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																		board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																	}
 																	mouvement = 0;
 																}
@@ -2210,12 +2210,12 @@ void main(int argc, char **argv)
 														Plateaux.clear();
 
 														Plateaux.draw(tabla);
-														if (transformareAlb == 1)
+														if (transformationBlanc == 1)
 														{
 															TransformareALB.setPosition(transformA.x* taille, transformA.y* taille);
 															Plateaux.draw(TransformareALB);
 														}
-														if (transformareNegru == 1)
+														if (transformationNoir == 1)
 														{
 															TransformareNEGRU.setPosition(transformN.x* taille, transformN.y* taille);
 															Plateaux.draw(TransformareNEGRU);
@@ -2225,71 +2225,71 @@ void main(int argc, char **argv)
 															Mutare.setPosition(pos.x - dx, pos.y - dy);
 															Plateaux.draw(Mutare);
 														}
-														for (int i = 0; i < LUNGIME; i++)
+														for (int i = 0; i < LONGUEUR; i++)
 														{
-															for (int j = 0; j < LUNGIME; j++)
+															for (int j = 0; j < LONGUEUR; j++)
 															{
 
 																if (board[i][j] != 0)
 																{
-																	if (board[i][j] == PionNEGRU)
+																	if (board[i][j] == PionNOIR)
 																	{
 																		PionNegru.setPosition(j * taille, i * taille);
 																		Plateaux.draw(PionNegru);
 																	}
-																	if (board[i][j] == PionALB)
+																	if (board[i][j] == PionBLANC)
 																	{
 																		PionAlb.setPosition(j * taille, i * taille);
 																		Plateaux.draw(PionAlb);
 																	}
-																	if (board[i][j] == TurnNEGRU)
+																	if (board[i][j] == TourNOIR)
 																	{
 																		TurnNegru.setPosition(j * taille, i * taille);
 																		Plateaux.draw(TurnNegru);
 
 																	}
-																	if (board[i][j] == TurnALB)
+																	if (board[i][j] == TourBlanche)
 																	{
 																		TurnAlb.setPosition(j * taille, i * taille);
 																		Plateaux.draw(TurnAlb);
 
 																	}
-																	if (board[i][j] == CalALB)
+																	if (board[i][j] == ChevalierBlanc)
 																	{
 																		CalAlb.setPosition(j * taille, i * taille);
 																		Plateaux.draw(CalAlb);
 																	}
-																	if (board[i][j] == CalNEGRU)
+																	if (board[i][j] == ChevalierNoir)
 																	{
 																		CalNegru.setPosition(j * taille, i * taille);
 																		Plateaux.draw(CalNegru);
 																	}
-																	if (board[i][j] == NebunNEGRU)
+																	if (board[i][j] == FouNOIR)
 																	{
 																		NebunNegru.setPosition(j * taille, i * taille);
 																		Plateaux.draw(NebunNegru);
 																	}
-																	if (board[i][j] == NebunALB)
+																	if (board[i][j] == FouBLANC)
 																	{
 																		NebunAlb.setPosition(j * taille, i * taille);
 																		Plateaux.draw(NebunAlb);
 																	}
-																	if (board[i][j] == ReginaALB)
+																	if (board[i][j] == ReineBLANCHE)
 																	{
 																		ReginaAlb.setPosition(j * taille, i * taille);
 																		Plateaux.draw(ReginaAlb);
 																	}
-																	if (board[i][j] == ReginaNEGRU)
+																	if (board[i][j] == ReineNOIRE)
 																	{
 																		ReginaNegru.setPosition(j * taille, i * taille);
 																		Plateaux.draw(ReginaNegru);
 																	}
-																	if (board[i][j] == RegeNEGRU)
+																	if (board[i][j] == RoiNOIRE)
 																	{
 																		RegeNegru.setPosition(j * taille, i * taille);
 																		Plateaux.draw(RegeNegru);
 																	}
-																	if (board[i][j] == RegeALB)
+																	if (board[i][j] == RoiBLANC)
 																	{
 																		RegeAlb.setPosition(j * taille, i * taille);
 																		Plateaux.draw(RegeAlb);
@@ -2373,7 +2373,7 @@ void main(int argc, char **argv)
 
 																if (saevent.mouseButton.button == Mouse::Left)
 																{
-																	if (transformareAlb == 1)
+																	if (transformationBlanc == 1)
 																	{
 																		if (pos.y >= transformA.y * taille && pos.y <= (transformA.y + 1) * taille && pos.x >= transformA.x * taille && pos.x <= (transformA.x + 1) * taille)
 																		{
@@ -2381,28 +2381,28 @@ void main(int argc, char **argv)
 
 																			if (xx < 50 && yy < 50 && xx > 0 && yy > 0)
 																			{
-																				board[transformA.y][transformA.x] = TurnALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = TourBlanche;
+																				transformationBlanc = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy < 50 && yy > 0)
 																			{
-																				board[transformA.y][transformA.x] = ReginaALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = ReineBLANCHE;
+																				transformationBlanc = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy>50 && yy < 100)
 																			{
-																				board[transformA.y][transformA.x] = CalALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = ChevalierBlanc;
+																				transformationBlanc = 0;
 																			}
 																			if (xx < 50 && xx>0 && yy > 50 && y < 100)
 																			{
-																				board[transformA.y][transformA.x] = NebunALB;
-																				transformareAlb = 0;
+																				board[transformA.y][transformA.x] = FouBLANC;
+																				transformationBlanc = 0;
 																			}
-																			if (transformareAlb == 0)
+																			if (transformationBlanc == 0)
 																			{
 																				pozRegeNegru();
-																				int h = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																				int h = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (h == 0)
 																				{
 																					sahNegru = 1;
@@ -2410,7 +2410,7 @@ void main(int argc, char **argv)
 																			}
 																		}
 																	}
-																	if (transformareNegru == 1)
+																	if (transformationNoir == 1)
 																	{
 																		if (pos.y >= transformN.y * taille && pos.y <= (transformN.y + 1) * taille && pos.x >= transformN.x * taille && pos.x <= (transformN.x + 1) * taille)
 																		{
@@ -2418,28 +2418,28 @@ void main(int argc, char **argv)
 
 																			if (xx < 50 && yy < 50 && xx > 0 && yy > 0)
 																			{
-																				board[transformN.y][transformN.x] = TurnNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = TourNOIR;
+																				transformationNoir = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy < 50 && yy > 0)
 																			{
-																				board[transformN.y][transformN.x] = ReginaNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = ReineNOIRE;
+																				transformationNoir = 0;
 																			}
 																			if (xx > 50 && xx < 100 && yy>50 && yy < 100)
 																			{
-																				board[transformN.y][transformN.x] = CalNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = ChevalierNoir;
+																				transformationNoir = 0;
 																			}
 																			if (xx < 50 && xx>0 && yy > 50 && y < 100)
 																			{
-																				board[transformN.y][transformN.x] = NebunNEGRU;
-																				transformareNegru = 0;
+																				board[transformN.y][transformN.x] = FouNOIR;
+																				transformationNoir = 0;
 																			}
-																			if (transformareNegru == 0)
+																			if (transformationNoir == 0)
 																			{
 																				pozRegeAlb();
-																				int h = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																				int h = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (h == 0)
 																				{
 																					sahAlb = 1;
@@ -2451,85 +2451,85 @@ void main(int argc, char **argv)
 																	{
 																		dx = pos.x - x * 100;
 																		dy = pos.y - y * 100;
-																		if (board[y][x] == PionNEGRU && mutare == 1)
+																		if (board[y][x] == PionNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = PionNEGRU;
+																			numarPiesaMutata = PionNOIR;
 																			Mutare = PionNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == PionALB && mutare == 0)
+																		if (board[y][x] == PionBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = PionALB;
+																			numarPiesaMutata = PionBLANC;
 																			Mutare = PionAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == TurnNEGRU && mutare == 1)
+																		if (board[y][x] == TourNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = TurnNEGRU;
+																			numarPiesaMutata = TourNOIR;
 																			Mutare = TurnNegru;
 																			board[y][x] = 0;
 
 																		}
-																		if (board[y][x] == TurnALB && mutare == 0)
+																		if (board[y][x] == TourBlanche && mutare == 0)
 																		{
-																			numarPiesaMutata = TurnALB;
+																			numarPiesaMutata = TourBlanche;
 																			Mutare = TurnAlb;
 																			board[y][x] = 0;
 
 																		}
-																		if (board[y][x] == CalALB && mutare == 0)
+																		if (board[y][x] == ChevalierBlanc && mutare == 0)
 																		{
-																			numarPiesaMutata = CalALB;
+																			numarPiesaMutata = ChevalierBlanc;
 																			Mutare = CalAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == CalNEGRU && mutare == 1)
+																		if (board[y][x] == ChevalierNoir && mutare == 1)
 																		{
-																			numarPiesaMutata = CalNEGRU;
+																			numarPiesaMutata = ChevalierNoir;
 																			Mutare = CalNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == NebunNEGRU && mutare == 1)
+																		if (board[y][x] == FouNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = NebunNEGRU;
+																			numarPiesaMutata = FouNOIR;
 																			Mutare = NebunNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == NebunALB && mutare == 0)
+																		if (board[y][x] == FouBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = NebunALB;
+																			numarPiesaMutata = FouBLANC;
 																			Mutare = NebunAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == ReginaALB && mutare == 0)
+																		if (board[y][x] == ReineBLANCHE && mutare == 0)
 																		{
-																			numarPiesaMutata = ReginaALB;
+																			numarPiesaMutata = ReineBLANCHE;
 																			Mutare = ReginaAlb;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == ReginaNEGRU && mutare == 1)
+																		if (board[y][x] == ReineNOIRE && mutare == 1)
 																		{
-																			numarPiesaMutata = ReginaNEGRU;
+																			numarPiesaMutata = ReineNOIRE;
 																			Mutare = ReginaNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == RegeNEGRU && mutare == 1)
+																		if (board[y][x] == RoiNOIRE && mutare == 1)
 																		{
-																			numarPiesaMutata = RegeNEGRU;
+																			numarPiesaMutata = RoiNOIRE;
 																			Mutare = RegeNegru;
 																			board[y][x] = 0;
 																		}
-																		if (board[y][x] == RegeALB && mutare == 0)
+																		if (board[y][x] == RoiBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = RegeALB;
+																			numarPiesaMutata = RoiBLANC;
 																			Mutare = RegeAlb;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == 0)
 																		{
 																			mouvement = 1;
-																			oldPoz.x = x;
-																			oldPoz.y = y;
+																			ancienPos.x = x;
+																			ancienPos.y = y;
 																		}
 																	}
 																}
@@ -2540,81 +2540,81 @@ void main(int argc, char **argv)
 																if (saevent.key.code == Mouse::Left)
 																{
 																	int ok = 2;
-																	if (numarPiesaMutata == PionALB && mouvement == 1)
+																	if (numarPiesaMutata == PionBLANC && mouvement == 1)
 																	{
-																		ok = PionA(oldPoz.x, oldPoz.y, x, y);
+																		ok = PionA(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == PionNEGRU && mouvement == 1)
+																	if (numarPiesaMutata == PionNOIR && mouvement == 1)
 																	{
-																		ok = PionN(oldPoz.x, oldPoz.y, x, y);
+																		ok = PionN(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == TurnALB && mouvement == 1)
+																	if (numarPiesaMutata == TourBlanche && mouvement == 1)
 																	{
-																		ok = TurnA(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && turnAlbStanga == 0 && oldPoz.y == 7 && oldPoz.x == 0)
+																		ok = TurnA(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && tourBlancGauche == 0 && ancienPos.y == 7 && ancienPos.x == 0)
 																		{
-																			turnAlbStanga = 1;
+																			tourBlancGauche = 1;
 
 																		}
-																		if (ok == 1 && turnAlbDreapta == 0 && oldPoz.y == 7 && oldPoz.x == 7)
+																		if (ok == 1 && tourBlancDroit == 0 && ancienPos.y == 7 && ancienPos.x == 7)
 																		{
-																			turnAlbDreapta = 1;
-
-																		}
-																	}
-																	if (numarPiesaMutata == TurnNEGRU && mouvement == 1)
-																	{
-																		ok = TurnN(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && turnNegruDreapta == 0 && oldPoz.y == 0 && oldPoz.x == 7)
-																		{
-																			turnNegruDreapta = 1;
-
-																		}
-																		if (ok == 1 && turnNegruStanga == 0 && oldPoz.y == 0 && oldPoz.x == 0)
-																		{
-																			turnNegruStanga = 1;
+																			tourBlancDroit = 1;
 
 																		}
 																	}
-																	if (numarPiesaMutata == NebunALB && mouvement == 1)
+																	if (numarPiesaMutata == TourNOIR && mouvement == 1)
 																	{
-																		ok = NebunA(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == NebunNEGRU && mouvement == 1)
-																	{
-																		ok = NebunN(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == ReginaALB && mouvement == 1)
-																	{
-																		ok = ReginaA(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == ReginaNEGRU && mouvement == 1)
-																	{
-																		ok = ReginaN(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == CalALB && mouvement == 1)
-																	{
-																		ok = CalA(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == CalNEGRU && mouvement == 1)
-																	{
-																		ok = CalN(oldPoz.x, oldPoz.y, x, y);
-																	}
-																	if (numarPiesaMutata == RegeNEGRU && mouvement == 1)
-																	{
-																		ok = RegeN(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && regeNegru == 0)
+																		ok = TurnN(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && tourNoirDroit == 0 && ancienPos.y == 0 && ancienPos.x == 7)
 																		{
-																			regeNegru = 1;
+																			tourNoirDroit = 1;
+
+																		}
+																		if (ok == 1 && tourNoirGauche == 0 && ancienPos.y == 0 && ancienPos.x == 0)
+																		{
+																			tourNoirGauche = 1;
 
 																		}
 																	}
-																	if (numarPiesaMutata == RegeALB && mouvement == 1)
+																	if (numarPiesaMutata == FouBLANC && mouvement == 1)
 																	{
-																		ok = RegeA(oldPoz.x, oldPoz.y, x, y);
-																		if (ok == 1 && regeAlb == 0)
+																		ok = NebunA(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == FouNOIR && mouvement == 1)
+																	{
+																		ok = NebunN(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ReineBLANCHE && mouvement == 1)
+																	{
+																		ok = ReginaA(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ReineNOIRE && mouvement == 1)
+																	{
+																		ok = ReginaN(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ChevalierBlanc && mouvement == 1)
+																	{
+																		ok = CalA(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == ChevalierNoir && mouvement == 1)
+																	{
+																		ok = CalN(ancienPos.x, ancienPos.y, x, y);
+																	}
+																	if (numarPiesaMutata == RoiNOIRE && mouvement == 1)
+																	{
+																		ok = RegeN(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && roiNR == 0)
 																		{
-																			regeAlb = 1;
+																			roiNR = 1;
+
+																		}
+																	}
+																	if (numarPiesaMutata == RoiBLANC && mouvement == 1)
+																	{
+																		ok = RegeA(ancienPos.x, ancienPos.y, x, y);
+																		if (ok == 1 && roiBLC == 0)
+																		{
+																			roiBLC = 1;
 
 																		}
 																	}
@@ -2622,16 +2622,16 @@ void main(int argc, char **argv)
 																	{
 																		int nr = board[y][x];
 																		board[y][x] = numarPiesaMutata;
-																		if (y == 0 && numarPiesaMutata == PionALB)
+																		if (y == 0 && numarPiesaMutata == PionBLANC)
 																		{
-																			transformareAlb = 1;
+																			transformationBlanc = 1;
 																			transformA.x = x;
 																			transformA.y = y;
 																			board[y][x] = 0;
 																		}
-																		if (y == 7 && numarPiesaMutata == PionNEGRU)
+																		if (y == 7 && numarPiesaMutata == PionNOIR)
 																		{
-																			transformareNegru = 1;
+																			transformationNoir = 1;
 																			transformN.x = x;
 																			transformN.y = y;
 																			board[y][x] = 0;
@@ -2641,17 +2641,17 @@ void main(int argc, char **argv)
 																			if (sahAlb == 1)
 																			{
 																				pozRegeAlb();
-																				int s = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																				int s = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (s == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					sahAlb = 0;
 																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2662,16 +2662,16 @@ void main(int argc, char **argv)
 																			else
 																			{
 																				pozRegeAlb();
-																				int sa = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																				int sa = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (sa == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2685,17 +2685,17 @@ void main(int argc, char **argv)
 																			if (sahNegru == 1)
 																			{
 																				pozRegeNegru();
-																				int s = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																				int s = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (s == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					sahNegru = 0;
 																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
 																						sahAlb = 1;
@@ -2706,16 +2706,16 @@ void main(int argc, char **argv)
 																			else
 																			{
 																				pozRegeNegru();
-																				int sa = RegeNegruSahCheck(regeleNegru.x, regeleNegru.y);
+																				int sa = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (sa == 0)
 																				{
-																					board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																					board[y][x] = nr;
 																				}
 																				else
 																				{
 																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(regeleAlb.x, regeleAlb.y);
+																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
 																						sahAlb = 1;
@@ -2727,7 +2727,7 @@ void main(int argc, char **argv)
 																	}
 																	else if (ok == 0)
 																	{
-																		board[oldPoz.y][oldPoz.x] = numarPiesaMutata;
+																		board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
 																	}
 																	mouvement = 0;
 																}
@@ -2738,12 +2738,12 @@ void main(int argc, char **argv)
 														Multi.clear();
 
 														Multi.draw(tabla);
-														if (transformareAlb == 1)
+														if (transformationBlanc == 1)
 														{
 															TransformareALB.setPosition(transformA.x* taille, transformA.y* taille);
 															Multi.draw(TransformareALB);
 														}
-														if (transformareNegru == 1)
+														if (transformationNoir == 1)
 														{
 															TransformareNEGRU.setPosition(transformN.x* taille, transformN.y* taille);
 															Multi.draw(TransformareNEGRU);
@@ -2753,71 +2753,71 @@ void main(int argc, char **argv)
 															Mutare.setPosition(pos.x - dx, pos.y - dy);
 															Multi.draw(Mutare);
 														}
-														for (int i = 0; i < LUNGIME; i++)
+														for (int i = 0; i < LONGUEUR; i++)
 														{
-															for (int j = 0; j < LUNGIME; j++)
+															for (int j = 0; j < LONGUEUR; j++)
 															{
 
 																if (board[i][j] != 0)
 																{
-																	if (board[i][j] == PionNEGRU)
+																	if (board[i][j] == PionNOIR)
 																	{
 																		PionNegru.setPosition(j * taille, i * taille);
 																		Multi.draw(PionNegru);
 																	}
-																	if (board[i][j] == PionALB)
+																	if (board[i][j] == PionBLANC)
 																	{
 																		PionAlb.setPosition(j * taille, i * taille);
 																		Multi.draw(PionAlb);
 																	}
-																	if (board[i][j] == TurnNEGRU)
+																	if (board[i][j] == TourNOIR)
 																	{
 																		TurnNegru.setPosition(j * taille, i * taille);
 																		Multi.draw(TurnNegru);
 
 																	}
-																	if (board[i][j] == TurnALB)
+																	if (board[i][j] == TourBlanche)
 																	{
 																		TurnAlb.setPosition(j * taille, i * taille);
 																		Multi.draw(TurnAlb);
 
 																	}
-																	if (board[i][j] == CalALB)
+																	if (board[i][j] == ChevalierBlanc)
 																	{
 																		CalAlb.setPosition(j * taille, i * taille);
 																		Multi.draw(CalAlb);
 																	}
-																	if (board[i][j] == CalNEGRU)
+																	if (board[i][j] == ChevalierNoir)
 																	{
 																		CalNegru.setPosition(j * taille, i * taille);
 																		Multi.draw(CalNegru);
 																	}
-																	if (board[i][j] == NebunNEGRU)
+																	if (board[i][j] == FouNOIR)
 																	{
 																		NebunNegru.setPosition(j * taille, i * taille);
 																		Multi.draw(NebunNegru);
 																	}
-																	if (board[i][j] == NebunALB)
+																	if (board[i][j] == FouBLANC)
 																	{
 																		NebunAlb.setPosition(j * taille, i * taille);
 																		Multi.draw(NebunAlb);
 																	}
-																	if (board[i][j] == ReginaALB)
+																	if (board[i][j] == ReineBLANCHE)
 																	{
 																		ReginaAlb.setPosition(j * taille, i * taille);
 																		Multi.draw(ReginaAlb);
 																	}
-																	if (board[i][j] == ReginaNEGRU)
+																	if (board[i][j] == ReineNOIRE)
 																	{
 																		ReginaNegru.setPosition(j * taille, i * taille);
 																		Multi.draw(ReginaNegru);
 																	}
-																	if (board[i][j] == RegeNEGRU)
+																	if (board[i][j] == RoiNOIRE)
 																	{
 																		RegeNegru.setPosition(j * taille, i * taille);
 																		Multi.draw(RegeNegru);
 																	}
-																	if (board[i][j] == RegeALB)
+																	if (board[i][j] == RoiBLANC)
 																	{
 																		RegeAlb.setPosition(j * taille, i * taille);
 																		Multi.draw(RegeAlb);
