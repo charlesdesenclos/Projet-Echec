@@ -4,6 +4,7 @@
 #include "AfficheNP.h"
 #include "Instructions.h"
 #include "Plateau.h"
+#include "Option.h"
 
 #define LONGUEUR 8
 #define PionNOIR 1
@@ -2890,6 +2891,8 @@ void main(int argc, char **argv)
 							window.close();
 							RenderWindow Options(VideoMode(960, 720), "Options");
 
+							Option Option(Options.getSize().x, Options.getSize().y);
+
 							while (Options.isOpen())
 							{
 								Event aevent;
@@ -2904,6 +2907,8 @@ void main(int argc, char **argv)
 								Options.clear();
 
 								Options.draw(Obackground);
+
+								Option.draw(Options);
 
 								Options.display();
 
