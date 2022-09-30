@@ -7,6 +7,8 @@ Option::Option(float width, float height)
 		cout << "Police non trouvé";
 	}
 
+	// Affiche le texte
+
 	option[0].setFont(font);
 	option[0].setFillColor(Color::White);
 	option[0].setString("Option");

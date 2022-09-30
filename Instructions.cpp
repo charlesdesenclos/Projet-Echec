@@ -8,6 +8,8 @@ Instructions::Instructions(float width, float height)
 		cout << "Police non trouvé";
 	}
 
+	//Affiche le texte
+
 	instructions[0].setFont(font);
 	instructions[0].setFillColor(Color::White);
 	instructions[0].setString("Instructions");
