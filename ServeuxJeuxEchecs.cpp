@@ -1,9 +1,8 @@
-/*
 
 #include <iostream>
 #include <mosquitto.h>
 
-void main(int argc, char **argv)
+void ServeurJeuxEchecs(int argc, char **argv)
 {
 	mosquitto_lib_init();
 
@@ -22,4 +21,4 @@ void main(int argc, char **argv)
 	mosquitto_lib_cleanup();
 
 }
-*/
+
