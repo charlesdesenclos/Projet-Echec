@@ -2,7 +2,12 @@
 #include <iostream>
 #include <mosquitto.h>
 
-void ServeurJeuxEchecs(int argc, char **argv)
+#include "ServeurJeuxEchecs.h"
+
+
+
+
+void ServeurJeuxEchecs()
 {
 	mosquitto_lib_init();
 
@@ -16,9 +21,22 @@ void ServeurJeuxEchecs(int argc, char **argv)
 	else
 	{
 		std::cout << "Vous n'étes pas connecter";
+
+
 	}
+	int mid;
+	char msg[] = "Test message";
+	mosquitto_publish(client, &mid, "topictest", strlen(msg) + 1, msg, 0, true);
+
+	//mosquitto_subscribe(client, &mid, sub, 2);
+
+	int timeout; int max_packets;
+
+	mosquitto_loop(client, timeout, max_packets);
 
 	mosquitto_lib_cleanup();
 
 }
+
+
 

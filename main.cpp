@@ -5,6 +5,7 @@
 #include "Instructions.h"
 #include "Plateau.h"
 #include "Option.h"
+#include "ServeurJeuxEchecs.h"
 
 #define LONGUEUR 8
 #define PionNOIR 1
@@ -2312,6 +2313,8 @@ void main(int argc, char **argv)
 													Play.close();
 													RenderWindow Multi(VideoMode(800, 800), "Multi");
 													//Plateaux.setFramerateLimit(30);
+
+													void ServeurJeuxEchecs();
 
 													Texture t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15;
 
