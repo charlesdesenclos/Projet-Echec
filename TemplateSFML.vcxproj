@@ -143,7 +143,6 @@
     <ClInclude Include="AfficheNP.h" />
     <ClInclude Include="Decor.h" />
     <ClInclude Include="Instructions.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Plateau.h" />

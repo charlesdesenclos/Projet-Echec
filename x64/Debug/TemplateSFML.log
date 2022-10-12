@@ -1,69 +1,76 @@
-﻿  ServeurJeuxEchecs.cpp
-c:\users\jules\documents\github\projet-echec\serveurjeuxechecs.cpp(72): warning C4267: 'argument' : conversion de 'size_t' en 'int', perte possible de données
+﻿  AfficheNP.cpp
+  Decor.cpp
+  Instructions.cpp
   main.cpp
-c:\users\jules\documents\github\projet-echec\instructions.h(9): warning C4005: 'Max_main_menu' : redéfinition de macro
-  c:\users\jules\documents\github\projet-echec\menu.h(9): note: voir la définition précédente de 'Max_main_menu'
-c:\users\jules\documents\github\projet-echec\plateau.h(9): warning C4005: 'Max_main_menu' : redéfinition de macro
-  c:\users\jules\documents\github\projet-echec\instructions.h(9): note: voir la définition précédente de 'Max_main_menu'
-c:\users\jules\documents\github\projet-echec\option.h(9): warning C4005: 'Max_main_menu' : redéfinition de macro
-  c:\users\jules\documents\github\projet-echec\plateau.h(9): note: voir la définition précédente de 'Max_main_menu'
-c:\users\jules\documents\github\projet-echec\main.cpp(1565): warning C4326: le type de retour de 'main' doit être 'int' au lieu de 'void'
-c:\users\jules\documents\github\projet-echec\main.cpp(1571): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\instructions.h(9): warning C4005: 'Max_main_menu' : redéfinition de macro
+  c:\users\charles\documents\github\projet-echec\menu.h(9): note: voir la définition précédente de 'Max_main_menu'
+c:\users\charles\documents\github\projet-echec\plateau.h(9): warning C4005: 'Max_main_menu' : redéfinition de macro
+  c:\users\charles\documents\github\projet-echec\instructions.h(9): note: voir la définition précédente de 'Max_main_menu'
+c:\users\charles\documents\github\projet-echec\option.h(9): warning C4005: 'Max_main_menu' : redéfinition de macro
+  c:\users\charles\documents\github\projet-echec\plateau.h(9): note: voir la définition précédente de 'Max_main_menu'
+c:\users\charles\documents\github\projet-echec\main.cpp(1565): warning C4326: le type de retour de 'main' doit être 'int' au lieu de 'void'
+c:\users\charles\documents\github\projet-echec\main.cpp(1571): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\jules\documents\github\projet-echec\main.cpp(1638): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(1638): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\jules\documents\github\projet-echec\main.cpp(1760): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(1760): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\jules\documents\github\projet-echec\main.cpp(1930): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(1931): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2221): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2226): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2243): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2248): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2253): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2259): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2265): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2270): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2275): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2280): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2285): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2290): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2295): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2300): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2473): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2474): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2770): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2775): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2792): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2797): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2802): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2808): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2814): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2819): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2824): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2829): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2834): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2839): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2844): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2849): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-c:\users\jules\documents\github\projet-echec\main.cpp(2886): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(1930): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(1931): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2221): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2226): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2243): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2248): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2253): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2259): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2265): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2270): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2275): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2280): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2285): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2290): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2295): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2300): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2473): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2474): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2770): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2775): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2792): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2797): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2802): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2808): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2814): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2819): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2824): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2829): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2834): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2839): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2844): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2849): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2886): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
-c:\users\jules\documents\github\projet-echec\main.cpp(2920): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+c:\users\charles\documents\github\projet-echec\main.cpp(2920): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
           with
           [
               T=unsigned int
           ]
+  Menu.cpp
+  Option.cpp
+  Plateau.cpp
+  ServeurJeuxEchecs.cpp
+c:\users\charles\documents\github\projet-echec\serveurjeuxechecs.cpp(72): warning C4267: 'argument' : conversion de 'size_t' en 'int', perte possible de données
   Génération de code en cours...
-  TemplateSFML.vcxproj -> C:\Users\Jules\Documents\GitHub\Projet-Echec\x64\Debug\TemplateSFML.exe
+  LINK : C:\Users\Charles\Documents\GitHub\Projet-Echec\x64\Debug\TemplateSFML.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+  TemplateSFML.vcxproj -> C:\Users\Charles\Documents\GitHub\Projet-Echec\x64\Debug\TemplateSFML.exe
