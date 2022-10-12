@@ -24,6 +24,8 @@
 
 using namespace sf;
 
+using namespace std;
+
 struct poz
 {
 	int x, y;
@@ -1842,7 +1844,7 @@ void main(int argc, char **argv)
 														Event saevent;
 														while (Plateaux.pollEvent(saevent))
 														{
-															if (aevent.type == Event::Closed)
+															if (saevent.type == Event::Closed)
 															{
 																Plateaux.close();
 															}
@@ -2210,10 +2212,17 @@ void main(int argc, char **argv)
 																	mouvement = 0;
 																}
 															}
+															if (saevent.type == Event::KeyPressed)
+															{
+																if (aevent.key.code == Keyboard::Escape)
+																{
+																	Plateaux.close();
+																}
+															}
 
 														}
 
-														Plateaux.clear();
+														
 
 														Plateaux.draw(tabla);
 														if (transformationBlanc == 1)
@@ -2303,10 +2312,14 @@ void main(int argc, char **argv)
 																}
 															}
 														}
+														
 														Plateaux.display();
+
+
 
 														
 													}
+													Plateaux.close();
 													
 												}
 											}
@@ -2372,7 +2385,7 @@ void main(int argc, char **argv)
 														std::cin >> idPartie;
 													}
 
-													MQTTClient::getInstance()->subscribe("partie" + std::to_string(idPartie));
+													MQTTClient::getInstance()->subscribe("partie" + to_string(idPartie));
 
 
 													while (Multi.isOpen())
@@ -2385,7 +2398,7 @@ void main(int argc, char **argv)
 														Event saevent;
 														while (Multi.pollEvent(saevent))
 														{
-															if (aevent.type == Event::Closed)
+															if (saevent.type == Event::Closed)
 															{
 																Multi.close();
 															}
