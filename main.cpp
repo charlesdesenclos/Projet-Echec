@@ -6,6 +6,7 @@
 #include "Plateau.h"
 #include "Option.h"
 #include "ServeurJeuxEchecs.h"
+#include "main.h"
 
 #define LONGUEUR 8
 #define PionNOIR 1
@@ -29,6 +30,7 @@ struct poz
 }ancienPos, roiBlanc, roiNoir, transformA, transformN;
 
 int  taille = 100, mouvement = 0, x, y;
+
 int board[8][8] =
 { 2, 3, 4, 5, 6, 4, 3, 2,
   1, 1, 1, 1, 1, 1, 1, 1,
@@ -43,6 +45,8 @@ int tourBlancDroit = 0, tourBlancGauche = 0, roiBLC = 0;
 int tourNoirDroit = 0, tourNoirGauche = 0, roiNR = 0;
 
 int mutare = 0; // 0 déplace le blanc, 1 déplace le noir
+
+int numarPiesaMutataMultiJugador = 0;
 
 int sahAlb = 0, sahNegru = 0;
 
@@ -2314,8 +2318,6 @@ void main(int argc, char **argv)
 													RenderWindow Multi(VideoMode(800, 800), "Multi");
 													//Plateaux.setFramerateLimit(30);
 
-													void ServeurJeuxEchecs();
-
 													Texture t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15;
 
 													t1.loadFromFile("images/board.png");
@@ -2352,10 +2354,25 @@ void main(int argc, char **argv)
 													Sprite TransformareNEGRU(t15);
 
 													float dx = 0, dy = 0;
-													int numarPiesaMutata = 0;
+													
 
+													int choix;
+													std::cout << "Host (1) - Client (2) ? ";
+													std::cin >> choix;
+													int idPartie;
 
+													if (choix == 1)
+													{
+														idPartie = rand() % 100000;
+														std::cout << "Id partie = " << idPartie << std::endl;
+													}
+													else
+													{
+														std::cout << "Saisir id partie a rejoindre : ";
+														std::cin >> idPartie;
+													}
 
+													MQTTClient::getInstance()->subscribe("partie" + std::to_string(idPartie));
 
 
 													while (Multi.isOpen())
@@ -2457,75 +2474,75 @@ void main(int argc, char **argv)
 																		dy = pos.y - y * 100;
 																		if (board[y][x] == PionNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = PionNOIR;
+																			numarPiesaMutataMultiJugador = PionNOIR;
 																			Mutare = PionNegru;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == PionBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = PionBLANC;
+																			numarPiesaMutataMultiJugador = PionBLANC;
 																			Mutare = PionAlb;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == TourNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = TourNOIR;
+																			numarPiesaMutataMultiJugador = TourNOIR;
 																			Mutare = TurnNegru;
 																			board[y][x] = 0;
 
 																		}
 																		if (board[y][x] == TourBlanche && mutare == 0)
 																		{
-																			numarPiesaMutata = TourBlanche;
+																			numarPiesaMutataMultiJugador = TourBlanche;
 																			Mutare = TurnAlb;
 																			board[y][x] = 0;
 
 																		}
 																		if (board[y][x] == ChevalierBlanc && mutare == 0)
 																		{
-																			numarPiesaMutata = ChevalierBlanc;
+																			numarPiesaMutataMultiJugador = ChevalierBlanc;
 																			Mutare = CalAlb;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ChevalierNoir && mutare == 1)
 																		{
-																			numarPiesaMutata = ChevalierNoir;
+																			numarPiesaMutataMultiJugador = ChevalierNoir;
 																			Mutare = CalNegru;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == FouNOIR && mutare == 1)
 																		{
-																			numarPiesaMutata = FouNOIR;
+																			numarPiesaMutataMultiJugador = FouNOIR;
 																			Mutare = NebunNegru;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == FouBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = FouBLANC;
+																			numarPiesaMutataMultiJugador = FouBLANC;
 																			Mutare = NebunAlb;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ReineBLANCHE && mutare == 0)
 																		{
-																			numarPiesaMutata = ReineBLANCHE;
+																			numarPiesaMutataMultiJugador = ReineBLANCHE;
 																			Mutare = ReginaAlb;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ReineNOIRE && mutare == 1)
 																		{
-																			numarPiesaMutata = ReineNOIRE;
+																			numarPiesaMutataMultiJugador = ReineNOIRE;
 																			Mutare = ReginaNegru;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == RoiNOIRE && mutare == 1)
 																		{
-																			numarPiesaMutata = RoiNOIRE;
+																			numarPiesaMutataMultiJugador = RoiNOIRE;
 																			Mutare = RegeNegru;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == RoiBLANC && mutare == 0)
 																		{
-																			numarPiesaMutata = RoiBLANC;
+																			numarPiesaMutataMultiJugador = RoiBLANC;
 																			Mutare = RegeAlb;
 																			board[y][x] = 0;
 																		}
@@ -2544,15 +2561,15 @@ void main(int argc, char **argv)
 																if (saevent.key.code == Mouse::Left)
 																{
 																	int ok = 2;
-																	if (numarPiesaMutata == PionBLANC && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == PionBLANC && mouvement == 1)
 																	{
 																		ok = PionA(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == PionNOIR && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == PionNOIR && mouvement == 1)
 																	{
 																		ok = PionN(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == TourBlanche && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == TourBlanche && mouvement == 1)
 																	{
 																		ok = TurnA(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && tourBlancGauche == 0 && ancienPos.y == 7 && ancienPos.x == 0)
@@ -2566,7 +2583,7 @@ void main(int argc, char **argv)
 
 																		}
 																	}
-																	if (numarPiesaMutata == TourNOIR && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == TourNOIR && mouvement == 1)
 																	{
 																		ok = TurnN(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && tourNoirDroit == 0 && ancienPos.y == 0 && ancienPos.x == 7)
@@ -2580,31 +2597,31 @@ void main(int argc, char **argv)
 
 																		}
 																	}
-																	if (numarPiesaMutata == FouBLANC && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == FouBLANC && mouvement == 1)
 																	{
 																		ok = NebunA(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == FouNOIR && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == FouNOIR && mouvement == 1)
 																	{
 																		ok = NebunN(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == ReineBLANCHE && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == ReineBLANCHE && mouvement == 1)
 																	{
 																		ok = ReginaA(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == ReineNOIRE && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == ReineNOIRE && mouvement == 1)
 																	{
 																		ok = ReginaN(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == ChevalierBlanc && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == ChevalierBlanc && mouvement == 1)
 																	{
 																		ok = CalA(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == ChevalierNoir && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == ChevalierNoir && mouvement == 1)
 																	{
 																		ok = CalN(ancienPos.x, ancienPos.y, x, y);
 																	}
-																	if (numarPiesaMutata == RoiNOIRE && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == RoiNOIRE && mouvement == 1)
 																	{
 																		ok = RegeN(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && roiNR == 0)
@@ -2613,7 +2630,7 @@ void main(int argc, char **argv)
 
 																		}
 																	}
-																	if (numarPiesaMutata == RoiBLANC && mouvement == 1)
+																	if (numarPiesaMutataMultiJugador == RoiBLANC && mouvement == 1)
 																	{
 																		ok = RegeA(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && roiBLC == 0)
@@ -2625,20 +2642,24 @@ void main(int argc, char **argv)
 																	if (ok == 1)
 																	{
 																		int nr = board[y][x];
-																		board[y][x] = numarPiesaMutata;
-																		if (y == 0 && numarPiesaMutata == PionBLANC)
+																		//board[y][x] = numarPiesaMutataMultiJugador;
+																		std::string deplacement = std::to_string(ancienPos.x) + std::to_string(ancienPos.y) + std::to_string(x) + std::to_string(y);
+																		std::string topic = "partie" + std::to_string(idPartie);
+																		MQTTClient::getInstance()->sendMessage(topic, deplacement);
+																		
+																		if (y == 0 && numarPiesaMutataMultiJugador == PionBLANC)
 																		{
 																			transformationBlanc = 1;
 																			transformA.x = x;
 																			transformA.y = y;
-																			board[y][x] = 0;
+																			//board[y][x] = 0;
 																		}
-																		if (y == 7 && numarPiesaMutata == PionNOIR)
+																		if (y == 7 && numarPiesaMutataMultiJugador == PionNOIR)
 																		{
 																			transformationNoir = 1;
 																			transformN.x = x;
 																			transformN.y = y;
-																			board[y][x] = 0;
+																			//board[y][x] = 0;
 																		}
 																		if (mutare == 0) // blanc a bougé et noir suit
 																		{
@@ -2648,8 +2669,8 @@ void main(int argc, char **argv)
 																				int s = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (s == 0)
 																				{
-																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
-																					board[y][x] = nr;
+																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
+																					//board[y][x] = nr;
 																				}
 																				else
 																				{
@@ -2660,7 +2681,7 @@ void main(int argc, char **argv)
 																					{
 																						sahNegru = 1;
 																					}
-																					mutare = 1;
+																					//mutare = 1;
 																				}
 																			}
 																			else
@@ -2669,8 +2690,8 @@ void main(int argc, char **argv)
 																				int sa = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
 																				if (sa == 0)
 																				{
-																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
-																					board[y][x] = nr;
+																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
+																					//board[y][x] = nr;
 																				}
 																				else
 																				{
@@ -2680,7 +2701,7 @@ void main(int argc, char **argv)
 																					{
 																						sahNegru = 1;
 																					}
-																					mutare = 1;
+																					//mutare = 1;
 																				}
 																			}
 																		}
@@ -2692,8 +2713,8 @@ void main(int argc, char **argv)
 																				int s = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (s == 0)
 																				{
-																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
-																					board[y][x] = nr;
+																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
+																					//board[y][x] = nr;
 																				}
 																				else
 																				{
@@ -2704,7 +2725,7 @@ void main(int argc, char **argv)
 																					{
 																						sahAlb = 1;
 																					}
-																					mutare = 0;
+																					//mutare = 0;
 																				}
 																			}
 																			else
@@ -2713,8 +2734,8 @@ void main(int argc, char **argv)
 																				int sa = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
 																				if (sa == 0)
 																				{
-																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
-																					board[y][x] = nr;
+																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
+																					//board[y][x] = nr;
 																				}
 																				else
 																				{
@@ -2724,14 +2745,14 @@ void main(int argc, char **argv)
 																					{
 																						sahAlb = 1;
 																					}
-																					mutare = 0;
+																					//mutare = 0;
 																				}
 																			}
 																		}
 																	}
 																	else if (ok == 0)
 																	{
-																		board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
+																		board[ancienPos.y][ancienPos.x] = numarPiesaMutataMultiJugador;
 																	}
 																	mouvement = 0;
 																}
@@ -2740,6 +2761,8 @@ void main(int argc, char **argv)
 														}
 
 														Multi.clear();
+
+														MQTTClient::getInstance()->loopOnce();
 
 														Multi.draw(tabla);
 														if (transformationBlanc == 1)
