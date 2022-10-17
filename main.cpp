@@ -50,12 +50,12 @@ int mutare = 0; // 0 déplace le blanc, 1 déplace le noir
 
 int numarPiesaMutataMultiJugador = 0;
 
-int sahAlb = 0, sahNegru = 0;
+int EchecsBLANC = 0, sahNegru = 0;
 
 int transformationBlanc = 0, transformationNoir = 0;
 
 
-int PionA(int ox, int oy, int nx, int ny)
+int PionB(int ox, int oy, int nx, int ny)
 {
 	if (ancienPos.y == 6)
 	{
@@ -115,7 +115,7 @@ int PionN(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int TurnA(int ox, int oy, int nx, int ny)
+int TourB(int ox, int oy, int nx, int ny)
 {
 	for (int i = ox - 1; i >= 0; i--) //À gauche
 	{
@@ -164,7 +164,7 @@ int TurnA(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int TurnN(int ox, int oy, int nx, int ny)
+int TourN(int ox, int oy, int nx, int ny)
 {
 	for (int i = ox - 1; i >= 0; i--) // À gauche
 	{
@@ -213,7 +213,7 @@ int TurnN(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int NebunA(int ox, int oy, int nx, int ny)
+int FouB(int ox, int oy, int nx, int ny)
 {
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à gauche
@@ -270,7 +270,7 @@ int NebunA(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int NebunN(int ox, int oy, int nx, int ny)
+int FouN(int ox, int oy, int nx, int ny)
 {
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à gauche
@@ -327,7 +327,7 @@ int NebunN(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int ReginaA(int ox, int oy, int nx, int ny)
+int ReineB(int ox, int oy, int nx, int ny)
 {
 	for (int i = ox - 1; i >= 0; i--) // À gauche
 	{
@@ -428,7 +428,7 @@ int ReginaA(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int ReginaN(int ox, int oy, int nx, int ny)
+int ReineN(int ox, int oy, int nx, int ny)
 {
 	for (int i = ox - 1; i >= 0; i--) // À gauche
 	{
@@ -529,7 +529,7 @@ int ReginaN(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int CalA(int ox, int oy, int nx, int ny)
+int ChevalB(int ox, int oy, int nx, int ny)
 {
 	if (oy - 2 >= 0 && ox - 1 >= 0 && ny == oy - 2 && nx == ox - 1 && board[ny][nx] >= 0)
 	{
@@ -566,7 +566,7 @@ int CalA(int ox, int oy, int nx, int ny)
 	return 0;
 }
 
-int CalN(int ox, int oy, int nx, int ny)
+int ChevalN(int ox, int oy, int nx, int ny)
 {
 	if (oy - 2 >= 0 && ox - 1 >= 0 && ny == oy - 2 && nx == ox - 1 && board[ny][nx] <= 0)
 	{
@@ -604,12 +604,12 @@ int CalN(int ox, int oy, int nx, int ny)
 }
 
 
-int PionASah(int posx, int posy, int regex, int regey)
+int PionBJeuxEchecs(int posx, int posy, int roix, int roiy)
 {
 
 	if (board[posy - 1][posx - 1] >= 0)
 	{
-		if (posy - 1 == regey && posx - 1 == regex)
+		if (posy - 1 == roiy && posx - 1 == roix)
 		{
 			return 1;
 		}
@@ -617,7 +617,7 @@ int PionASah(int posx, int posy, int regex, int regey)
 	if (board[posy - 1][posx + 1] >= 0)
 	{
 
-		if (posy - 1 == regey && posx + 1 == regex)
+		if (posy - 1 == roiy && posx + 1 == roix)
 		{
 			return 1;
 		}
@@ -625,11 +625,11 @@ int PionASah(int posx, int posy, int regex, int regey)
 	return 0;
 }
 
-int TurnASah(int ox, int oy, int regex, int regey)
+int TourBJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
 	for (int i = ox - 1; i >= 0; i--) // À gauche
 	{
-		if (board[oy][i] >= 0 && (regex == i && regey == oy))
+		if (board[oy][i] >= 0 && (roix == i && roiy == oy))
 		{
 			return 1;
 		}
@@ -640,7 +640,7 @@ int TurnASah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // en haut
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -651,7 +651,7 @@ int TurnASah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LONGUEUR; i++) // À droite
 	{
-		if (board[oy][i] >= 0 && (regey == oy && regex == i))
+		if (board[oy][i] >= 0 && (roiy == oy && roix == i))
 		{
 			return 1;
 		}
@@ -662,7 +662,7 @@ int TurnASah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -674,12 +674,12 @@ int TurnASah(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int NebunASah(int ox, int oy, int regex, int regey)
+int FouBJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à gauche
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -692,7 +692,7 @@ int NebunASah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à droite
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -705,7 +705,7 @@ int NebunASah(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // en bas à gauche
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -718,7 +718,7 @@ int NebunASah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i <= 7; i++)  // en bas à droite
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -731,11 +731,11 @@ int NebunASah(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int ReginaASah(int ox, int oy, int regex, int regey)
+int ReinneBJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
 	for (int i = ox - 1; i >= 0; i--) // À gauche
 	{
-		if (board[oy][i] >= 0 && (regex == i && regey == oy))
+		if (board[oy][i] >= 0 && (roix == i && roiy == oy))
 		{
 			return 1;
 		}
@@ -746,7 +746,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // en haut
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -757,7 +757,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LONGUEUR; i++) //À droite
 	{
-		if (board[oy][i] >= 0 && (regey == oy && regex == i))
+		if (board[oy][i] >= 0 && (roiy == oy && roix == i))
 		{
 			return 1;
 		}
@@ -768,7 +768,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
-		if (board[i][ox] >= 0 && (regey == i && regex == ox))
+		if (board[i][ox] >= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -780,7 +780,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à gauche
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -793,7 +793,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à droite
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -806,7 +806,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // en bas à gauche
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -819,7 +819,7 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i < LONGUEUR; i++)  // en bas à droite
 	{
-		if (board[i][j] >= 0 && (regey == i && regex == j))
+		if (board[i][j] >= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -832,74 +832,74 @@ int ReginaASah(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int CalASah(int ox, int oy, int regex, int regey)
+int ChevalBJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
-	if (oy - 2 >= 0 && ox - 1 >= 0 && regey == oy - 2 && regex == ox - 1 && board[regey][regex] >= 0)
+	if (oy - 2 >= 0 && ox - 1 >= 0 && roiy == oy - 2 && roix == ox - 1 && board[roiy][roix] >= 0)
 	{
 		return 1; // en haut à gauche
 	}
-	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && regey == oy - 2 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && roiy == oy - 2 && roix == ox + 1 && board[roiy][roix] >= 0)
 	{
 		return 1; // En haut à droite
 	}
-	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && regey == oy - 1 && regex == ox + 2 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && roiy == oy - 1 && roix == ox + 2 && board[roiy][roix] >= 0)
 	{
 		return 1; // droite 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && regey == oy + 1 && regex == ox + 2 && board[regey][regex] >= 0)
+	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && roiy == oy + 1 && roix == ox + 2 && board[roiy][roix] >= 0)
 	{
 		return 1; // droite 2
 	}
-	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && regey == oy + 2 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && roiy == oy + 2 && roix == ox + 1 && board[roiy][roix] >= 0)
 	{
 		return 1; // vers le bas 1
 	}
-	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] >= 0)
+	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && roiy == oy + 2 && roix == ox - 1 && board[roiy][roix] >= 0)
 	{
 		return 1; //vers le bas 2
 	}
-	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] >= 0)
+	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && roiy == oy + 1 && roix == ox - 2 && board[roiy][roix] >= 0)
 	{
 		return 1; // gauche 1
 	}
-	if (oy - 1 >= 0 && ox - 2 >= 0 && regey == oy - 1 && regex == ox - 2 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox - 2 >= 0 && roiy == oy - 1 && roix == ox - 2 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
 	return 0;
 }
 
-int RegeASah(int ox, int oy, int regex, int regey)
+int RoiBJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
-	if (ox - 1 >= 0 && oy - 1 >= 0 && regey == oy - 1 && regex == ox - 1 && board[regey][regex] <= 0)
+	if (ox - 1 >= 0 && oy - 1 >= 0 && roiy == oy - 1 && roix == ox - 1 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && regex == ox && regey == oy - 1 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && roix == ox && roiy == oy - 1 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && regex == ox + 1 && regey == oy - 1 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && roix == ox + 1 && roiy == oy - 1 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LONGUEUR && regey == oy && regex == ox + 1 && board[regey][regex] <= 0)
+	if (ox + 1 < LONGUEUR && roiy == oy && roix == ox + 1 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && roiy == oy + 1 && roix == ox + 1 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
-	if (oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox && board[regey][regex] <= 0)
+	if (oy + 1 < LONGUEUR && roiy == oy + 1 && roix == ox && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && regex == ox - 1 && regey == oy + 1 && board[regey][regex] <= 0)
+	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && roix == ox - 1 && roiy == oy + 1 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && regey == oy && regex == ox - 1 && board[regey][regex] <= 0)
+	if (ox - 1 >= 0 && roiy == oy && roix == ox - 1 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
@@ -907,18 +907,18 @@ int RegeASah(int ox, int oy, int regex, int regey)
 }
 
 
-int PionNSah(int ox, int oy, int regex, int regey)
+int PionNJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
 	if (board[oy + 1][ox - 1] <= 0)
 	{
-		if (regey == oy + 1 && regex == ox - 1)
+		if (roiy == oy + 1 && roix == ox - 1)
 		{
 			return 1;
 		}
 	}
 	if (board[oy + 1][ox + 1] <= 0)
 	{
-		if (regey == oy + 1 && regex == ox + 1)
+		if (roiy == oy + 1 && roix == ox + 1)
 		{
 			return 1;
 		}
@@ -926,11 +926,11 @@ int PionNSah(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int TurnNSah(int ox, int oy, int regex, int regey)
+int TourNJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
 	for (int i = ox - 1; i >= 0; i--) // À gauche
 	{
-		if (board[oy][i] <= 0 && (regex == i && regey == oy))
+		if (board[oy][i] <= 0 && (roix == i && roiy == oy))
 		{
 			return 1;
 		}
@@ -941,7 +941,7 @@ int TurnNSah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // en haut
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -952,7 +952,7 @@ int TurnNSah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LONGUEUR; i++) // À droite
 	{
-		if (board[oy][i] <= 0 && (regey == oy && regex == i))
+		if (board[oy][i] <= 0 && (roiy == oy && roix == i))
 		{
 			return 1;
 		}
@@ -963,7 +963,7 @@ int TurnNSah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -975,12 +975,12 @@ int TurnNSah(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int NebunNSah(int ox, int oy, int regex, int regey)
+int FouNJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à gauche
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -993,7 +993,7 @@ int NebunNSah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à droite
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -1006,7 +1006,7 @@ int NebunNSah(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // en bas à gauche
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -1019,7 +1019,7 @@ int NebunNSah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i <= 7; i++)  // en bas à droite
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -1032,11 +1032,11 @@ int NebunNSah(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int ReginaNSah(int ox, int oy, int regex, int regey)
+int ReinneNJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
 	for (int i = ox - 1; i >= 0; i--) // À gauche
 	{
-		if (board[oy][i] <= 0 && (regex == i && regey == oy))
+		if (board[oy][i] <= 0 && (roix == i && roiy == oy))
 		{
 			return 1;
 		}
@@ -1047,7 +1047,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy - 1; i >= 0; i--) // en haut
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -1058,7 +1058,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = ox + 1; i < LONGUEUR; i++) //À droite
 	{
-		if (board[oy][i] <= 0 && (regey == oy && regex == i))
+		if (board[oy][i] <= 0 && (roiy == oy && roix == i))
 		{
 			return 1;
 		}
@@ -1069,7 +1069,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	}
 	for (int i = oy + 1; i < LONGUEUR; i++) // vers le bas
 	{
-		if (board[i][ox] <= 0 && (regey == i && regex == ox))
+		if (board[i][ox] <= 0 && (roiy == i && roix == ox))
 		{
 			return 1;
 		}
@@ -1081,7 +1081,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	int j = ox - 1;
 	for (int i = oy - 1; i >= 0; i--) //en haut à gauche
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -1094,7 +1094,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy - 1; i >= 0; i--) // en haut à droite
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -1107,7 +1107,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	j = ox - 1;
 	for (int i = oy + 1; i <= 7; i++) // en bas à gauche
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -1120,7 +1120,7 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	j = ox + 1;
 	for (int i = oy + 1; i < LONGUEUR; i++)  //en bas à droite
 	{
-		if (board[i][j] <= 0 && (regey == i && regex == j))
+		if (board[i][j] <= 0 && (roiy == i && roix == j))
 		{
 			return 1;
 		}
@@ -1133,74 +1133,74 @@ int ReginaNSah(int ox, int oy, int regex, int regey)
 	return 0;
 }
 
-int CalNSah(int ox, int oy, int regex, int regey)
+int ChevalNJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
-	if (oy - 2 >= 0 && ox - 1 >= 0 && regey == oy - 2 && regex == ox - 1 && board[regey][regex] <= 0)
+	if (oy - 2 >= 0 && ox - 1 >= 0 && roiy == oy - 2 && roix == ox - 1 && board[roiy][roix] <= 0)
 	{
 		return 1; // en haut à gauche
 	}
-	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && regey == oy - 2 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (oy - 2 >= 0 && ox + 1 < LONGUEUR && roiy == oy - 2 && roix == ox + 1 && board[roiy][roix] <= 0)
 	{
 		return 1; // En haut à droite
 	}
-	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && regey == oy - 1 && regex == ox + 2 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox + 2 < LONGUEUR && roiy == oy - 1 && roix == ox + 2 && board[roiy][roix] <= 0)
 	{
 		return 1; // droite 1
 	}
-	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && regey == oy + 1 && regex == ox + 2 && board[regey][regex] <= 0)
+	if (oy + 1 >= 0 && ox + 2 < LONGUEUR && roiy == oy + 1 && roix == ox + 2 && board[roiy][roix] <= 0)
 	{
 		return 1; // droite 2
 	}
-	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && regey == oy + 2 && regex == ox + 1 && board[regey][regex] <= 0)
+	if (oy + 2 < LONGUEUR && ox + 1 < LONGUEUR && roiy == oy + 2 && roix == ox + 1 && board[roiy][roix] <= 0)
 	{
 		return 1; // vers le bas 1
 	}
-	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && regey == oy + 2 && regex == ox - 1 && board[regey][regex] <= 0)
+	if (oy + 2 < LONGUEUR && ox - 1 >= 0 && roiy == oy + 2 && roix == ox - 1 && board[roiy][roix] <= 0)
 	{
 		return 1; //vers le bas 2
 	}
-	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && regey == oy + 1 && regex == ox - 2 && board[regey][regex] <= 0)
+	if (oy + 1 < LONGUEUR && ox - 2 >= 0 && roiy == oy + 1 && roix == ox - 2 && board[roiy][roix] <= 0)
 	{
 		return 1; // gauche 1
 	}
-	if (oy - 1 >= 0 && ox - 2 >= 0 && regey == oy - 1 && regex == ox - 2 && board[regey][regex] <= 0)
+	if (oy - 1 >= 0 && ox - 2 >= 0 && roiy == oy - 1 && roix == ox - 2 && board[roiy][roix] <= 0)
 	{
 		return 1;
 	}
 	return 0;
 }
 
-int RegeNSah(int ox, int oy, int regex, int regey)
+int RoiNJeuxEchecs(int ox, int oy, int roix, int roiy)
 {
-	if (ox - 1 >= 0 && oy - 1 >= 0 && regey == oy - 1 && regex == ox - 1 && board[regey][regex] >= 0)
+	if (ox - 1 >= 0 && oy - 1 >= 0 && roiy == oy - 1 && roix == ox - 1 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && regex == ox && regey == oy - 1 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && roix == ox && roiy == oy - 1 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
-	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && regex == ox + 1 && regey == oy - 1 && board[regey][regex] >= 0)
+	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && roix == ox + 1 && roiy == oy - 1 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LONGUEUR && regey == oy && regex == ox + 1 && board[regey][regex] >= 0)
+	if (ox + 1 < LONGUEUR && roiy == oy && roix == ox + 1 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
-	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox + 1 && board[regey][regex] >= 0)
+	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && roiy == oy + 1 && roix == ox + 1 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
-	if (oy + 1 < LONGUEUR && regey == oy + 1 && regex == ox && board[regey][regex] >= 0)
+	if (oy + 1 < LONGUEUR && roiy == oy + 1 && roix == ox && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && regex == ox - 1 && regey == oy + 1 && board[regey][regex] >= 0)
+	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && roix == ox - 1 && roiy == oy + 1 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
-	if (ox - 1 >= 0 && regey == oy && regex == ox - 1 && board[regey][regex] >= 0)
+	if (ox - 1 >= 0 && roiy == oy && roix == ox - 1 && board[roiy][roix] >= 0)
 	{
 		return 1;
 	}
@@ -1209,7 +1209,7 @@ int RegeNSah(int ox, int oy, int regex, int regey)
 
 
 
-int RegeNegruSahCheck(int posRegex, int posRegey)
+int RoiNoirJeuxEchecsVerif(int posRoix, int posRoiy)
 {
 	int ok = 0;
 	for (int i = 0; i < LONGUEUR; i++)
@@ -1220,27 +1220,27 @@ int RegeNegruSahCheck(int posRegex, int posRegey)
 			{
 				if (board[i][j] == PionBLANC)
 				{
-					ok = PionASah(j, i, posRegex, posRegey);
+					ok = PionBJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == TourBlanche)
 				{
-					ok = TurnASah(j, i, posRegex, posRegey);
+					ok = TourBJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == ChevalierBlanc)
 				{
-					ok = CalASah(j, i, posRegex, posRegey);
+					ok = ChevalBJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == FouBLANC)
 				{
-					ok = NebunASah(j, i, posRegex, posRegey);
+					ok = FouBJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == ReineBLANCHE)
 				{
-					ok = ReginaASah(j, i, posRegex, posRegey);
+					ok = ReinneBJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == RoiBLANC)
 				{
-					ok = RegeASah(j, i, posRegex, posRegey);
+					ok = RoiBJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (ok == 1)
 				{
@@ -1252,11 +1252,11 @@ int RegeNegruSahCheck(int posRegex, int posRegey)
 	return 1;
 }
 
-int RegeN(int ox, int oy, int nx, int ny)
+int RoiN(int ox, int oy, int nx, int ny)
 {
 	if (ox - 1 >= 0 && oy - 1 >= 0 && ny == oy - 1 && nx == ox - 1 && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox - 1, oy - 1);
+		int ok = RoiNoirJeuxEchecsVerif(ox - 1, oy - 1);
 		if (ok == 1)
 		{
 			return 1;  // en haut à gauche
@@ -1264,7 +1264,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (oy - 1 >= 0 && nx == ox && ny == oy - 1 && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox, oy - 1);
+		int ok = RoiNoirJeuxEchecsVerif(ox, oy - 1);
 		if (ok == 1)
 		{
 			return 1; // en haut
@@ -1272,7 +1272,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && nx == ox + 1 && ny == oy - 1 && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox + 1, oy - 1);
+		int ok = RoiNoirJeuxEchecsVerif(ox + 1, oy - 1);
 		if (ok == 1)
 		{
 			return 1; // En haut à droite
@@ -1280,7 +1280,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (ox + 1 < LONGUEUR && ny == oy && nx == ox + 1 && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox + 1, oy);
+		int ok = RoiNoirJeuxEchecsVerif(ox + 1, oy);
 		if (ok == 1)
 		{
 			return 1; // droit
@@ -1288,7 +1288,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox + 1 && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox + 1, oy + 1);
+		int ok = RoiNoirJeuxEchecsVerif(ox + 1, oy + 1);
 		if (ok == 1)
 		{
 			return 1; // en bas à droite
@@ -1296,7 +1296,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox, oy + 1);
+		int ok = RoiNoirJeuxEchecsVerif(ox, oy + 1);
 		if (ok == 1)
 		{
 			return 1; // vers le bas
@@ -1304,7 +1304,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && nx == ox - 1 && ny == oy + 1 && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox - 1, oy + 1);
+		int ok = RoiNoirJeuxEchecsVerif(ox - 1, oy + 1);
 		if (ok == 1)
 		{
 			return 1; //en bas à gauche
@@ -1312,7 +1312,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (ox - 1 >= 0 && ny == oy && nx == ox - 1 && board[ny][nx] <= 0)
 	{
-		int ok = RegeNegruSahCheck(ox - 1, oy);
+		int ok = RoiNoirJeuxEchecsVerif(ox - 1, oy);
 		if (ok == 1)
 		{
 			return 1; // La gauche
@@ -1321,13 +1321,13 @@ int RegeN(int ox, int oy, int nx, int ny)
 	// point à droite
 	if (tourNoirDroit == 0 && roiNR == 0 && board[0][5] == 0 && board[0][6] == 0 && ny == 0 && nx == 6)
 	{
-		int ok = RegeNegruSahCheck(4, 0);
+		int ok = RoiNoirJeuxEchecsVerif(4, 0);
 		if (ok == 1)
 		{
-			ok = RegeNegruSahCheck(5, 0);
+			ok = RoiNoirJeuxEchecsVerif(5, 0);
 			if (ok == 1)
 			{
-				ok = RegeNegruSahCheck(6, 0);
+				ok = RoiNoirJeuxEchecsVerif(6, 0);
 				if (ok == 1)
 				{
 					roiNR = 1;
@@ -1341,16 +1341,16 @@ int RegeN(int ox, int oy, int nx, int ny)
 	}
 	if (tourNoirGauche == 0 && roiNR == 0 && board[0][3] == 0 && board[0][2] == 0 && board[0][1] == 0 && ny == 0 && nx == 2)
 	{
-		int ok = RegeNegruSahCheck(4, 0);
+		int ok = RoiNoirJeuxEchecsVerif(4, 0);
 		if (ok == 1)
 		{
-			ok = RegeNegruSahCheck(3, 0);
+			ok = RoiNoirJeuxEchecsVerif(3, 0);
 			if (ok == 1)
 			{
-				ok = RegeNegruSahCheck(2, 0);
+				ok = RoiNoirJeuxEchecsVerif(2, 0);
 				if (ok == 1)
 				{
-					ok = RegeNegruSahCheck(1, 0);
+					ok = RoiNoirJeuxEchecsVerif(1, 0);
 					if (ok == 1)
 					{
 						roiNR = 1;
@@ -1367,7 +1367,7 @@ int RegeN(int ox, int oy, int nx, int ny)
 }
 
 
-int RegeAlbSahCheck(int posRegex, int posRegey)
+int RoiBlancJeuxEchecsVerif(int posRoix, int posRoiy)
 {
 	int ok = 0;
 	for (int i = 0; i < LONGUEUR; i++)
@@ -1378,27 +1378,27 @@ int RegeAlbSahCheck(int posRegex, int posRegey)
 			{
 				if (board[i][j] == PionNOIR)
 				{
-					ok = PionNSah(j, i, posRegex, posRegey);
+					ok = PionNJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == TourNOIR)
 				{
-					ok = TurnNSah(j, i, posRegex, posRegey);
+					ok = TourNJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == ChevalierNoir)
 				{
-					ok = CalNSah(j, i, posRegex, posRegey);
+					ok = ChevalNJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == FouNOIR)
 				{
-					ok = NebunNSah(j, i, posRegex, posRegey);
+					ok = FouNJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == ReineNOIRE)
 				{
-					ok = ReginaNSah(j, i, posRegex, posRegey);
+					ok = ReinneNJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (board[i][j] == RoiNOIRE)
 				{
-					ok = RegeNSah(j, i, posRegex, posRegey);
+					ok = RoiNJeuxEchecs(j, i, posRoix, posRoiy);
 				}
 				if (ok == 1)
 				{
@@ -1411,11 +1411,11 @@ int RegeAlbSahCheck(int posRegex, int posRegey)
 	return 1;
 }
 
-int RegeA(int ox, int oy, int nx, int ny)
+int RoiB(int ox, int oy, int nx, int ny)
 {
 	if (ox - 1 >= 0 && oy - 1 >= 0 && ny == oy - 1 && nx == ox - 1 && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox - 1, oy - 1);
+		int ok = RoiBlancJeuxEchecsVerif(ox - 1, oy - 1);
 		if (ok == 1)
 		{
 			return 1;  // en haut à gauche
@@ -1423,7 +1423,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 	}
 	if (oy - 1 >= 0 && nx == ox && ny == oy - 1 && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox, oy - 1);
+		int ok = RoiBlancJeuxEchecsVerif(ox, oy - 1);
 		if (ok == 1)
 		{
 			return 1; // en haut
@@ -1431,7 +1431,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 	}
 	if (oy - 1 >= 0 && ox + 1 < LONGUEUR && nx == ox + 1 && ny == oy - 1 && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox + 1, oy - 1);
+		int ok = RoiBlancJeuxEchecsVerif(ox + 1, oy - 1);
 		if (ok == 1)
 		{
 			return 1; // En haut à droite
@@ -1439,7 +1439,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 	}
 	if (ox + 1 < LONGUEUR && ny == oy && nx == ox + 1 && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox + 1, oy);
+		int ok = RoiBlancJeuxEchecsVerif(ox + 1, oy);
 		if (ok == 1)
 		{
 			return 1; // droit
@@ -1447,7 +1447,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 	}
 	if (ox + 1 < LONGUEUR && oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox + 1 && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox + 1, oy + 1);
+		int ok = RoiBlancJeuxEchecsVerif(ox + 1, oy + 1);
 		if (ok == 1)
 		{
 			return 1; // en bas à droite
@@ -1455,7 +1455,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 	}
 	if (oy + 1 < LONGUEUR && ny == oy + 1 && nx == ox && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox, oy + 1);
+		int ok = RoiBlancJeuxEchecsVerif(ox, oy + 1);
 		if (ok == 1)
 		{
 			return 1; // vers le bas
@@ -1463,7 +1463,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 	}
 	if (ox - 1 >= 0 && oy + 1 < LONGUEUR && nx == ox - 1 && ny == oy + 1 && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox - 1, oy + 1);
+		int ok = RoiBlancJeuxEchecsVerif(ox - 1, oy + 1);
 		if (ok == 1)
 		{
 			return 1; //en bas à gauche
@@ -1471,7 +1471,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 	}
 	if (ox - 1 >= 0 && ny == oy && nx == ox - 1 && board[ny][nx] >= 0)
 	{
-		int ok = RegeAlbSahCheck(ox - 1, oy);
+		int ok = RoiBlancJeuxEchecsVerif(ox - 1, oy);
 		if (ok == 1)
 		{
 			return 1; // La gauche
@@ -1481,13 +1481,13 @@ int RegeA(int ox, int oy, int nx, int ny)
 	if (roiBLC == 0 && tourBlancDroit == 0 && board[7][5] == 0 && board[7][6] == 0 && ny == 7 && nx == 6)
 	{
 		int ok = 1;
-		ok = RegeAlbSahCheck(4, 7);
+		ok = RoiBlancJeuxEchecsVerif(4, 7);
 		if (ok == 1)
 		{
-			ok = RegeAlbSahCheck(5, 7);
+			ok = RoiBlancJeuxEchecsVerif(5, 7);
 			if (ok == 1)
 			{
-				ok = RegeAlbSahCheck(6, 7);
+				ok = RoiBlancJeuxEchecsVerif(6, 7);
 				if (ok == 1)
 				{
 					board[7][7] = 0;
@@ -1503,16 +1503,16 @@ int RegeA(int ox, int oy, int nx, int ny)
 	if (roiBLC == 0 && tourBlancDroit == 0 && board[7][3] == 0 && board[7][2] == 0 && board[7][1] == 0 && ny == 7 && nx == 2)
 	{
 		int ok = 1;
-		ok = RegeAlbSahCheck(4, 7);
+		ok = RoiBlancJeuxEchecsVerif(4, 7);
 		if (ok == 1)
 		{
-			ok = RegeAlbSahCheck(3, 7);
+			ok = RoiBlancJeuxEchecsVerif(3, 7);
 			if (ok == 1)
 			{
-				ok = RegeAlbSahCheck(2, 7);
+				ok = RoiBlancJeuxEchecsVerif(2, 7);
 				if (ok == 1)
 				{
-					ok = RegeAlbSahCheck(1, 7);
+					ok = RoiBlancJeuxEchecsVerif(1, 7);
 					if (ok == 1)
 					{
 						board[7][0] = 0;
@@ -1529,7 +1529,7 @@ int RegeA(int ox, int oy, int nx, int ny)
 }
 
 
-void pozRegeAlb()
+void posRoiBlanc()
 {
 	for (int i = 0; i < LONGUEUR; i++)
 	{
@@ -1545,7 +1545,7 @@ void pozRegeAlb()
 	}
 }
 
-void pozRegeNegru()
+void posRoiNoir()
 {
 	for (int i = 0; i < LONGUEUR; i++)
 	{
@@ -1881,8 +1881,8 @@ void main(int argc, char **argv)
 																			}
 																			if (transformationBlanc == 0)
 																			{
-																				pozRegeNegru();
-																				int h = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																				posRoiNoir();
+																				int h = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (h == 0)
 																				{
 																					sahNegru = 1;
@@ -1918,11 +1918,11 @@ void main(int argc, char **argv)
 																			}
 																			if (transformationNoir == 0)
 																			{
-																				pozRegeAlb();
-																				int h = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																				posRoiBlanc();
+																				int h = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																				if (h == 0)
 																				{
-																					sahAlb = 1;
+																					EchecsBLANC = 1;
 																				}
 																			}
 																		}
@@ -2022,7 +2022,7 @@ void main(int argc, char **argv)
 																	int ok = 2;
 																	if (numarPiesaMutata == PionBLANC && mouvement == 1)
 																	{
-																		ok = PionA(ancienPos.x, ancienPos.y, x, y);
+																		ok = PionB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutata == PionNOIR && mouvement == 1)
 																	{
@@ -2030,7 +2030,7 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutata == TourBlanche && mouvement == 1)
 																	{
-																		ok = TurnA(ancienPos.x, ancienPos.y, x, y);
+																		ok = TourB(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && tourBlancGauche == 0 && ancienPos.y == 7 && ancienPos.x == 0)
 																		{
 																			tourBlancGauche = 1;
@@ -2044,7 +2044,7 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutata == TourNOIR && mouvement == 1)
 																	{
-																		ok = TurnN(ancienPos.x, ancienPos.y, x, y);
+																		ok = TourN(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && tourNoirDroit == 0 && ancienPos.y == 0 && ancienPos.x == 7)
 																		{
 																			tourNoirDroit = 1;
@@ -2058,31 +2058,31 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutata == FouBLANC && mouvement == 1)
 																	{
-																		ok = NebunA(ancienPos.x, ancienPos.y, x, y);
+																		ok = FouB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutata == FouNOIR && mouvement == 1)
 																	{
-																		ok = NebunN(ancienPos.x, ancienPos.y, x, y);
+																		ok = FouN(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutata == ReineBLANCHE && mouvement == 1)
 																	{
-																		ok = ReginaA(ancienPos.x, ancienPos.y, x, y);
+																		ok = ReineB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutata == ReineNOIRE && mouvement == 1)
 																	{
-																		ok = ReginaN(ancienPos.x, ancienPos.y, x, y);
+																		ok = ReineN(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutata == ChevalierBlanc && mouvement == 1)
 																	{
-																		ok = CalA(ancienPos.x, ancienPos.y, x, y);
+																		ok = ChevalB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutata == ChevalierNoir && mouvement == 1)
 																	{
-																		ok = CalN(ancienPos.x, ancienPos.y, x, y);
+																		ok = ChevalN(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutata == RoiNOIRE && mouvement == 1)
 																	{
-																		ok = RegeN(ancienPos.x, ancienPos.y, x, y);
+																		ok = RoiN(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && roiNR == 0)
 																		{
 																			roiNR = 1;
@@ -2091,7 +2091,7 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutata == RoiBLANC && mouvement == 1)
 																	{
-																		ok = RegeA(ancienPos.x, ancienPos.y, x, y);
+																		ok = RoiB(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && roiBLC == 0)
 																		{
 																			roiBLC = 1;
@@ -2118,10 +2118,10 @@ void main(int argc, char **argv)
 																		}
 																		if (mutare == 0) // blanc a bougé et noir suit
 																		{
-																			if (sahAlb == 1)
+																			if (EchecsBLANC == 1)
 																			{
-																				pozRegeAlb();
-																				int s = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																				posRoiBlanc();
+																				int s = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																				if (s == 0)
 																				{
 																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2129,9 +2129,9 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					sahAlb = 0;
-																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																					EchecsBLANC = 0;
+																					posRoiNoir();
+																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2141,8 +2141,8 @@ void main(int argc, char **argv)
 																			}
 																			else
 																			{
-																				pozRegeAlb();
-																				int sa = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																				posRoiBlanc();
+																				int sa = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																				if (sa == 0)
 																				{
 																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2150,8 +2150,8 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																					posRoiNoir();
+																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2164,8 +2164,8 @@ void main(int argc, char **argv)
 																		{
 																			if (sahNegru == 1)
 																			{
-																				pozRegeNegru();
-																				int s = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																				posRoiNoir();
+																				int s = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (s == 0)
 																				{
 																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2174,19 +2174,19 @@ void main(int argc, char **argv)
 																				else
 																				{
 																					sahNegru = 0;
-																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																					posRoiBlanc();
+																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
-																						sahAlb = 1;
+																						EchecsBLANC = 1;
 																					}
 																					mutare = 0;
 																				}
 																			}
 																			else
 																			{
-																				pozRegeNegru();
-																				int sa = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																				posRoiNoir();
+																				int sa = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (sa == 0)
 																				{
 																					board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2194,11 +2194,11 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																					posRoiBlanc();
+																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
-																						sahAlb = 1;
+																						EchecsBLANC = 1;
 																					}
 																					mutare = 0;
 																				}
@@ -2435,8 +2435,8 @@ void main(int argc, char **argv)
 																			}
 																			if (transformationBlanc == 0)
 																			{
-																				pozRegeNegru();
-																				int h = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																				posRoiNoir();
+																				int h = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (h == 0)
 																				{
 																					sahNegru = 1;
@@ -2472,11 +2472,11 @@ void main(int argc, char **argv)
 																			}
 																			if (transformationNoir == 0)
 																			{
-																				pozRegeAlb();
-																				int h = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																				posRoiBlanc();
+																				int h = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																				if (h == 0)
 																				{
-																					sahAlb = 1;
+																					EchecsBLANC = 1;
 																				}
 																			}
 																		}
@@ -2576,7 +2576,7 @@ void main(int argc, char **argv)
 																	int ok = 2;
 																	if (numarPiesaMutataMultiJugador == PionBLANC && mouvement == 1)
 																	{
-																		ok = PionA(ancienPos.x, ancienPos.y, x, y);
+																		ok = PionB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutataMultiJugador == PionNOIR && mouvement == 1)
 																	{
@@ -2584,7 +2584,7 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutataMultiJugador == TourBlanche && mouvement == 1)
 																	{
-																		ok = TurnA(ancienPos.x, ancienPos.y, x, y);
+																		ok = TourB(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && tourBlancGauche == 0 && ancienPos.y == 7 && ancienPos.x == 0)
 																		{
 																			tourBlancGauche = 1;
@@ -2598,7 +2598,7 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutataMultiJugador == TourNOIR && mouvement == 1)
 																	{
-																		ok = TurnN(ancienPos.x, ancienPos.y, x, y);
+																		ok = TourN(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && tourNoirDroit == 0 && ancienPos.y == 0 && ancienPos.x == 7)
 																		{
 																			tourNoirDroit = 1;
@@ -2612,31 +2612,31 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutataMultiJugador == FouBLANC && mouvement == 1)
 																	{
-																		ok = NebunA(ancienPos.x, ancienPos.y, x, y);
+																		ok = FouB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutataMultiJugador == FouNOIR && mouvement == 1)
 																	{
-																		ok = NebunN(ancienPos.x, ancienPos.y, x, y);
+																		ok = FouN(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutataMultiJugador == ReineBLANCHE && mouvement == 1)
 																	{
-																		ok = ReginaA(ancienPos.x, ancienPos.y, x, y);
+																		ok = ReineB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutataMultiJugador == ReineNOIRE && mouvement == 1)
 																	{
-																		ok = ReginaN(ancienPos.x, ancienPos.y, x, y);
+																		ok = ReineN(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutataMultiJugador == ChevalierBlanc && mouvement == 1)
 																	{
-																		ok = CalA(ancienPos.x, ancienPos.y, x, y);
+																		ok = ChevalB(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutataMultiJugador == ChevalierNoir && mouvement == 1)
 																	{
-																		ok = CalN(ancienPos.x, ancienPos.y, x, y);
+																		ok = ChevalN(ancienPos.x, ancienPos.y, x, y);
 																	}
 																	if (numarPiesaMutataMultiJugador == RoiNOIRE && mouvement == 1)
 																	{
-																		ok = RegeN(ancienPos.x, ancienPos.y, x, y);
+																		ok = RoiN(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && roiNR == 0)
 																		{
 																			roiNR = 1;
@@ -2645,7 +2645,7 @@ void main(int argc, char **argv)
 																	}
 																	if (numarPiesaMutataMultiJugador == RoiBLANC && mouvement == 1)
 																	{
-																		ok = RegeA(ancienPos.x, ancienPos.y, x, y);
+																		ok = RoiB(ancienPos.x, ancienPos.y, x, y);
 																		if (ok == 1 && roiBLC == 0)
 																		{
 																			roiBLC = 1;
@@ -2676,10 +2676,10 @@ void main(int argc, char **argv)
 																		}
 																		if (mutare == 0) // blanc a bougé et noir suit
 																		{
-																			if (sahAlb == 1)
+																			if (EchecsBLANC == 1)
 																			{
-																				pozRegeAlb();
-																				int s = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																				posRoiBlanc();
+																				int s = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																				if (s == 0)
 																				{
 																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2687,9 +2687,9 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					sahAlb = 0;
-																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																					EchecsBLANC = 0;
+																					posRoiNoir();
+																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2699,8 +2699,8 @@ void main(int argc, char **argv)
 																			}
 																			else
 																			{
-																				pozRegeAlb();
-																				int sa = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																				posRoiBlanc();
+																				int sa = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																				if (sa == 0)
 																				{
 																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2708,8 +2708,8 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					pozRegeNegru();
-																					int sah = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																					posRoiNoir();
+																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																					if (sah == 0)
 																					{
 																						sahNegru = 1;
@@ -2722,8 +2722,8 @@ void main(int argc, char **argv)
 																		{
 																			if (sahNegru == 1)
 																			{
-																				pozRegeNegru();
-																				int s = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																				posRoiNoir();
+																				int s = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (s == 0)
 																				{
 																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2732,19 +2732,19 @@ void main(int argc, char **argv)
 																				else
 																				{
 																					sahNegru = 0;
-																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																					posRoiBlanc();
+																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
-																						sahAlb = 1;
+																						EchecsBLANC = 1;
 																					}
 																					//mutare = 0;
 																				}
 																			}
 																			else
 																			{
-																				pozRegeNegru();
-																				int sa = RegeNegruSahCheck(roiNoir.x, roiNoir.y);
+																				posRoiNoir();
+																				int sa = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (sa == 0)
 																				{
 																					//board[ancienPos.y][ancienPos.x] = numarPiesaMutata;
@@ -2752,11 +2752,11 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					pozRegeAlb();
-																					int sah = RegeAlbSahCheck(roiBlanc.x, roiBlanc.y);
+																					posRoiBlanc();
+																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
 																					if (sah == 0)
 																					{
-																						sahAlb = 1;
+																						EchecsBLANC = 1;
 																					}
 																					//mutare = 0;
 																				}
