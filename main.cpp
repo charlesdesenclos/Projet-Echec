@@ -1572,7 +1572,7 @@ void main(int argc, char **argv)
 
 	Menu menu(window.getSize().x, window.getSize().y);
 
-	
+
 	// Affichage du thème à la page d'accueil
 
 	RectangleShape background;
@@ -1748,9 +1748,9 @@ void main(int argc, char **argv)
 			{
 				if (event.mouseButton.button == Mouse::Left)
 				{
-					
+
 					//printf("%d %d\n", event.mouseButton.x, event.mouseButton.y);
-					
+
 					if (event.mouseButton.x >= 337 && event.mouseButton.y >= 199)
 					{
 						if (event.mouseButton.x <= 750 && event.mouseButton.y <= 245)
@@ -1761,12 +1761,12 @@ void main(int argc, char **argv)
 
 							AfficheNP AfficheNP(Play.getSize().x, Play.getSize().y);
 
-							
-							
+
+
 
 							while (Play.isOpen())
 							{
-								
+
 								Event aevent;
 								while (Play.pollEvent(aevent))
 								{
@@ -1778,16 +1778,16 @@ void main(int argc, char **argv)
 
 									if (aevent.type == Event::MouseButtonPressed)
 									{
-										
+
 										if (aevent.mouseButton.button == Mouse::Left)
 										{
-											
+
 											if (aevent.mouseButton.x >= 337 && aevent.mouseButton.y >= 199)
 											{
 												if (aevent.mouseButton.x <= 750 && aevent.mouseButton.y <= 245)
 												{
 
-													
+
 													Play.close();
 													RenderWindow Plateaux(VideoMode(800, 800), "Plateau");
 													//Plateaux.setFramerateLimit(30);
@@ -1810,37 +1810,37 @@ void main(int argc, char **argv)
 													t14.loadFromFile("images/TransformareAlb.png");
 													t15.loadFromFile("images/TransformareNegru.png");
 
-													Sprite tabla(t1);
-													Sprite PionNegru(t2);
-													Sprite PionAlb(t3);
-													Sprite TurnNegru(t4);
-													Sprite TurnAlb(t5);
-													Sprite CalAlb(t6);
-													Sprite CalNegru(t7);
-													Sprite NebunNegru(t8);
-													Sprite NebunAlb(t9);
-													Sprite ReginaAlb(t10);
-													Sprite ReginaNegru(t11);
-													Sprite RegeNegru(t12);
-													Sprite RegeAlb(t13);
-													Sprite Mutare;
-													Sprite TransformareALB(t14);
-													Sprite TransformareNEGRU(t15);
+													Sprite tableau(t1);
+													Sprite PionNoir(t2);
+													Sprite PionBlanc(t3);
+													Sprite TourNoir(t4);
+													Sprite TourBlanc(t5);
+													Sprite ChevalBlanc(t6);
+													Sprite ChevalNoir(t7);
+													Sprite FouNoir(t8);
+													Sprite FouBlanc(t9);
+													Sprite ReineBlanc(t10);
+													Sprite ReineNoir(t11);
+													Sprite RoiNoir(t12);
+													Sprite RoiBlanc(t13);
+													Sprite Mouvement;
+													Sprite TransformeBlanc(t14);
+													Sprite TransformeNoir(t15);
 
 													float dx = 0, dy = 0;
 													int numarPiesaMutata = 0;
-													
 
-													
-													
-													
+
+
+
+
 													while (Plateaux.isOpen())
 													{
-								
+
 														Vector2i pos = Mouse::getPosition(Plateaux);
 														x = pos.x / taille;
 														y = pos.y / taille;
-														
+
 														Event saevent;
 														while (Plateaux.pollEvent(saevent))
 														{
@@ -1934,75 +1934,75 @@ void main(int argc, char **argv)
 																		if (board[y][x] == PionNOIR && mutare == 1)
 																		{
 																			numarPiesaMutata = PionNOIR;
-																			Mutare = PionNegru;
+																			Mouvement = PionNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == PionBLANC && mutare == 0)
 																		{
 																			numarPiesaMutata = PionBLANC;
-																			Mutare = PionAlb;
+																			Mouvement = PionBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == TourNOIR && mutare == 1)
 																		{
 																			numarPiesaMutata = TourNOIR;
-																			Mutare = TurnNegru;
+																			Mouvement = TourNoir;
 																			board[y][x] = 0;
 
 																		}
 																		if (board[y][x] == TourBlanche && mutare == 0)
 																		{
 																			numarPiesaMutata = TourBlanche;
-																			Mutare = TurnAlb;
+																			Mouvement = TourBlanc;
 																			board[y][x] = 0;
 
 																		}
 																		if (board[y][x] == ChevalierBlanc && mutare == 0)
 																		{
 																			numarPiesaMutata = ChevalierBlanc;
-																			Mutare = CalAlb;
+																			Mouvement = ChevalBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ChevalierNoir && mutare == 1)
 																		{
 																			numarPiesaMutata = ChevalierNoir;
-																			Mutare = CalNegru;
+																			Mouvement = ChevalNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == FouNOIR && mutare == 1)
 																		{
 																			numarPiesaMutata = FouNOIR;
-																			Mutare = NebunNegru;
+																			Mouvement = FouNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == FouBLANC && mutare == 0)
 																		{
 																			numarPiesaMutata = FouBLANC;
-																			Mutare = NebunAlb;
+																			Mouvement = FouBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ReineBLANCHE && mutare == 0)
 																		{
 																			numarPiesaMutata = ReineBLANCHE;
-																			Mutare = ReginaAlb;
+																			Mouvement = ReineBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ReineNOIRE && mutare == 1)
 																		{
 																			numarPiesaMutata = ReineNOIRE;
-																			Mutare = ReginaNegru;
+																			Mouvement = ReineNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == RoiNOIRE && mutare == 1)
 																		{
 																			numarPiesaMutata = RoiNOIRE;
-																			Mutare = RegeNegru;
+																			Mouvement = RoiNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == RoiBLANC && mutare == 0)
 																		{
 																			numarPiesaMutata = RoiBLANC;
-																			Mutare = RegeAlb;
+																			Mouvement = RoiBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == 0)
@@ -2222,23 +2222,23 @@ void main(int argc, char **argv)
 
 														}
 
-														
 
-														Plateaux.draw(tabla);
+
+														Plateaux.draw(tableau);
 														if (transformationBlanc == 1)
 														{
-															TransformareALB.setPosition(transformA.x* taille, transformA.y* taille);
-															Plateaux.draw(TransformareALB);
+															TransformeBlanc.setPosition(transformA.x* taille, transformA.y* taille);
+															Plateaux.draw(TransformeBlanc);
 														}
 														if (transformationNoir == 1)
 														{
-															TransformareNEGRU.setPosition(transformN.x* taille, transformN.y* taille);
-															Plateaux.draw(TransformareNEGRU);
+															TransformeNoir.setPosition(transformN.x* taille, transformN.y* taille);
+															Plateaux.draw(TransformeNoir);
 														}
 														if (mouvement == 1)
 														{
-															Mutare.setPosition(pos.x - dx, pos.y - dy);
-															Plateaux.draw(Mutare);
+															Mouvement.setPosition(pos.x - dx, pos.y - dy);
+															Plateaux.draw(Mouvement);
 														}
 														for (int i = 0; i < LONGUEUR; i++)
 														{
@@ -2249,78 +2249,78 @@ void main(int argc, char **argv)
 																{
 																	if (board[i][j] == PionNOIR)
 																	{
-																		PionNegru.setPosition(j * taille, i * taille);
-																		Plateaux.draw(PionNegru);
+																		PionNoir.setPosition(j * taille, i * taille);
+																		Plateaux.draw(PionNoir);
 																	}
 																	if (board[i][j] == PionBLANC)
 																	{
-																		PionAlb.setPosition(j * taille, i * taille);
-																		Plateaux.draw(PionAlb);
+																		PionBlanc.setPosition(j * taille, i * taille);
+																		Plateaux.draw(PionBlanc);
 																	}
 																	if (board[i][j] == TourNOIR)
 																	{
-																		TurnNegru.setPosition(j * taille, i * taille);
-																		Plateaux.draw(TurnNegru);
+																		TourNoir.setPosition(j * taille, i * taille);
+																		Plateaux.draw(TourNoir);
 
 																	}
 																	if (board[i][j] == TourBlanche)
 																	{
-																		TurnAlb.setPosition(j * taille, i * taille);
-																		Plateaux.draw(TurnAlb);
+																		TourBlanc.setPosition(j * taille, i * taille);
+																		Plateaux.draw(TourBlanc);
 
 																	}
 																	if (board[i][j] == ChevalierBlanc)
 																	{
-																		CalAlb.setPosition(j * taille, i * taille);
-																		Plateaux.draw(CalAlb);
+																		ChevalBlanc.setPosition(j * taille, i * taille);
+																		Plateaux.draw(ChevalBlanc);
 																	}
 																	if (board[i][j] == ChevalierNoir)
 																	{
-																		CalNegru.setPosition(j * taille, i * taille);
-																		Plateaux.draw(CalNegru);
+																		ChevalNoir.setPosition(j * taille, i * taille);
+																		Plateaux.draw(ChevalNoir);
 																	}
 																	if (board[i][j] == FouNOIR)
 																	{
-																		NebunNegru.setPosition(j * taille, i * taille);
-																		Plateaux.draw(NebunNegru);
+																		FouNoir.setPosition(j * taille, i * taille);
+																		Plateaux.draw(FouNoir);
 																	}
 																	if (board[i][j] == FouBLANC)
 																	{
-																		NebunAlb.setPosition(j * taille, i * taille);
-																		Plateaux.draw(NebunAlb);
+																		FouBlanc.setPosition(j * taille, i * taille);
+																		Plateaux.draw(FouBlanc);
 																	}
 																	if (board[i][j] == ReineBLANCHE)
 																	{
-																		ReginaAlb.setPosition(j * taille, i * taille);
-																		Plateaux.draw(ReginaAlb);
+																		ReineBlanc.setPosition(j * taille, i * taille);
+																		Plateaux.draw(ReineBlanc);
 																	}
 																	if (board[i][j] == ReineNOIRE)
 																	{
-																		ReginaNegru.setPosition(j * taille, i * taille);
-																		Plateaux.draw(ReginaNegru);
+																		ReineNoir.setPosition(j * taille, i * taille);
+																		Plateaux.draw(ReineNoir);
 																	}
 																	if (board[i][j] == RoiNOIRE)
 																	{
-																		RegeNegru.setPosition(j * taille, i * taille);
-																		Plateaux.draw(RegeNegru);
+																		RoiNoir.setPosition(j * taille, i * taille);
+																		Plateaux.draw(RoiNoir);
 																	}
 																	if (board[i][j] == RoiBLANC)
 																	{
-																		RegeAlb.setPosition(j * taille, i * taille);
-																		Plateaux.draw(RegeAlb);
+																		RoiBlanc.setPosition(j * taille, i * taille);
+																		Plateaux.draw(RoiBlanc);
 																	}
 																}
 															}
 														}
-														
+
 														Plateaux.display();
 
 
 
-														
+
 													}
 													Plateaux.close();
-													
+
 												}
 											}
 											if (aevent.mouseButton.x >= 343 && aevent.mouseButton.y >= 305)
@@ -2349,25 +2349,25 @@ void main(int argc, char **argv)
 													t14.loadFromFile("images/TransformareAlb.png");
 													t15.loadFromFile("images/TransformareNegru.png");
 
-													Sprite tabla(t1);
-													Sprite PionNegru(t2);
-													Sprite PionAlb(t3);
-													Sprite TurnNegru(t4);
-													Sprite TurnAlb(t5);
-													Sprite CalAlb(t6);
-													Sprite CalNegru(t7);
-													Sprite NebunNegru(t8);
-													Sprite NebunAlb(t9);
-													Sprite ReginaAlb(t10);
-													Sprite ReginaNegru(t11);
-													Sprite RegeNegru(t12);
-													Sprite RegeAlb(t13);
-													Sprite Mutare;
-													Sprite TransformareALB(t14);
-													Sprite TransformareNEGRU(t15);
+													Sprite tableau(t1);
+													Sprite PionNoir(t2);
+													Sprite PionBlanc(t3);
+													Sprite TourNoir(t4);
+													Sprite TourBlanc(t5);
+													Sprite ChevalBlanc(t6);
+													Sprite ChevalNoir(t7);
+													Sprite FouNoir(t8);
+													Sprite FouBlanc(t9);
+													Sprite ReineBlanc(t10);
+													Sprite ReineNoir(t11);
+													Sprite RoiNoir(t12);
+													Sprite RoiBlanc(t13);
+													Sprite Mouvement;
+													Sprite TransformeBlanc(t14);
+													Sprite TransformeNoir(t15);
 
 													float dx = 0, dy = 0;
-													
+
 
 													int choix;
 													std::cout << "Host (1) - Client (2) ? ";
@@ -2488,75 +2488,75 @@ void main(int argc, char **argv)
 																		if (board[y][x] == PionNOIR && mutare == 1)
 																		{
 																			numarPiesaMutataMultiJugador = PionNOIR;
-																			Mutare = PionNegru;
+																			Mouvement = PionNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == PionBLANC && mutare == 0)
 																		{
 																			numarPiesaMutataMultiJugador = PionBLANC;
-																			Mutare = PionAlb;
+																			Mouvement = PionBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == TourNOIR && mutare == 1)
 																		{
 																			numarPiesaMutataMultiJugador = TourNOIR;
-																			Mutare = TurnNegru;
+																			Mouvement = TourNoir;
 																			board[y][x] = 0;
 
 																		}
 																		if (board[y][x] == TourBlanche && mutare == 0)
 																		{
 																			numarPiesaMutataMultiJugador = TourBlanche;
-																			Mutare = TurnAlb;
+																			Mouvement = TourBlanc;
 																			board[y][x] = 0;
 
 																		}
 																		if (board[y][x] == ChevalierBlanc && mutare == 0)
 																		{
 																			numarPiesaMutataMultiJugador = ChevalierBlanc;
-																			Mutare = CalAlb;
+																			Mouvement = ChevalBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ChevalierNoir && mutare == 1)
 																		{
 																			numarPiesaMutataMultiJugador = ChevalierNoir;
-																			Mutare = CalNegru;
+																			Mouvement = ChevalNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == FouNOIR && mutare == 1)
 																		{
 																			numarPiesaMutataMultiJugador = FouNOIR;
-																			Mutare = NebunNegru;
+																			Mouvement = FouNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == FouBLANC && mutare == 0)
 																		{
 																			numarPiesaMutataMultiJugador = FouBLANC;
-																			Mutare = NebunAlb;
+																			Mouvement = FouBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ReineBLANCHE && mutare == 0)
 																		{
 																			numarPiesaMutataMultiJugador = ReineBLANCHE;
-																			Mutare = ReginaAlb;
+																			Mouvement = ReineBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == ReineNOIRE && mutare == 1)
 																		{
 																			numarPiesaMutataMultiJugador = ReineNOIRE;
-																			Mutare = ReginaNegru;
+																			Mouvement = ReineNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == RoiNOIRE && mutare == 1)
 																		{
 																			numarPiesaMutataMultiJugador = RoiNOIRE;
-																			Mutare = RegeNegru;
+																			Mouvement = RoiNoir;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == RoiBLANC && mutare == 0)
 																		{
 																			numarPiesaMutataMultiJugador = RoiBLANC;
-																			Mutare = RegeAlb;
+																			Mouvement = RoiBlanc;
 																			board[y][x] = 0;
 																		}
 																		if (board[y][x] == 0)
@@ -2659,7 +2659,7 @@ void main(int argc, char **argv)
 																		std::string deplacement = std::to_string(ancienPos.x) + std::to_string(ancienPos.y) + std::to_string(x) + std::to_string(y);
 																		std::string topic = "partie" + std::to_string(idPartie);
 																		MQTTClient::getInstance()->sendMessage(topic, deplacement);
-																		
+
 																		if (y == 0 && numarPiesaMutataMultiJugador == PionBLANC)
 																		{
 																			transformationBlanc = 1;
@@ -2777,21 +2777,21 @@ void main(int argc, char **argv)
 
 														MQTTClient::getInstance()->loopOnce();
 
-														Multi.draw(tabla);
+														Multi.draw(tableau);
 														if (transformationBlanc == 1)
 														{
-															TransformareALB.setPosition(transformA.x* taille, transformA.y* taille);
-															Multi.draw(TransformareALB);
+															TransformeBlanc.setPosition(transformA.x* taille, transformA.y* taille);
+															Multi.draw(TransformeBlanc);
 														}
 														if (transformationNoir == 1)
 														{
-															TransformareNEGRU.setPosition(transformN.x* taille, transformN.y* taille);
-															Multi.draw(TransformareNEGRU);
+															TransformeNoir.setPosition(transformN.x* taille, transformN.y* taille);
+															Multi.draw(TransformeNoir);
 														}
 														if (mouvement == 1)
 														{
-															Mutare.setPosition(pos.x - dx, pos.y - dy);
-															Multi.draw(Mutare);
+															Mouvement.setPosition(pos.x - dx, pos.y - dy);
+															Multi.draw(Mouvement);
 														}
 														for (int i = 0; i < LONGUEUR; i++)
 														{
@@ -2802,65 +2802,65 @@ void main(int argc, char **argv)
 																{
 																	if (board[i][j] == PionNOIR)
 																	{
-																		PionNegru.setPosition(j * taille, i * taille);
-																		Multi.draw(PionNegru);
+																		PionNoir.setPosition(j * taille, i * taille);
+																		Multi.draw(PionNoir);
 																	}
 																	if (board[i][j] == PionBLANC)
 																	{
-																		PionAlb.setPosition(j * taille, i * taille);
-																		Multi.draw(PionAlb);
+																		PionBlanc.setPosition(j * taille, i * taille);
+																		Multi.draw(PionBlanc);
 																	}
 																	if (board[i][j] == TourNOIR)
 																	{
-																		TurnNegru.setPosition(j * taille, i * taille);
-																		Multi.draw(TurnNegru);
+																		TourNoir.setPosition(j * taille, i * taille);
+																		Multi.draw(TourNoir);
 
 																	}
 																	if (board[i][j] == TourBlanche)
 																	{
-																		TurnAlb.setPosition(j * taille, i * taille);
-																		Multi.draw(TurnAlb);
+																		TourBlanc.setPosition(j * taille, i * taille);
+																		Multi.draw(TourBlanc);
 
 																	}
 																	if (board[i][j] == ChevalierBlanc)
 																	{
-																		CalAlb.setPosition(j * taille, i * taille);
-																		Multi.draw(CalAlb);
+																		ChevalBlanc.setPosition(j * taille, i * taille);
+																		Multi.draw(ChevalBlanc);
 																	}
 																	if (board[i][j] == ChevalierNoir)
 																	{
-																		CalNegru.setPosition(j * taille, i * taille);
-																		Multi.draw(CalNegru);
+																		ChevalNoir.setPosition(j * taille, i * taille);
+																		Multi.draw(ChevalNoir);
 																	}
 																	if (board[i][j] == FouNOIR)
 																	{
-																		NebunNegru.setPosition(j * taille, i * taille);
-																		Multi.draw(NebunNegru);
+																		FouNoir.setPosition(j * taille, i * taille);
+																		Multi.draw(FouNoir);
 																	}
 																	if (board[i][j] == FouBLANC)
 																	{
-																		NebunAlb.setPosition(j * taille, i * taille);
-																		Multi.draw(NebunAlb);
+																		FouBlanc.setPosition(j * taille, i * taille);
+																		Multi.draw(ReineBlanc);
 																	}
 																	if (board[i][j] == ReineBLANCHE)
 																	{
-																		ReginaAlb.setPosition(j * taille, i * taille);
-																		Multi.draw(ReginaAlb);
+																		ReineBlanc.setPosition(j * taille, i * taille);
+																		Multi.draw(ReineBlanc);
 																	}
 																	if (board[i][j] == ReineNOIRE)
 																	{
-																		ReginaNegru.setPosition(j * taille, i * taille);
-																		Multi.draw(ReginaNegru);
+																		ReineNoir.setPosition(j * taille, i * taille);
+																		Multi.draw(ReineNoir);
 																	}
 																	if (board[i][j] == RoiNOIRE)
 																	{
-																		RegeNegru.setPosition(j * taille, i * taille);
-																		Multi.draw(RegeNegru);
+																		RoiNoir.setPosition(j * taille, i * taille);
+																		Multi.draw(RoiNoir);
 																	}
 																	if (board[i][j] == RoiBLANC)
 																	{
-																		RegeAlb.setPosition(j * taille, i * taille);
-																		Multi.draw(RegeAlb);
+																		RoiBlanc.setPosition(j * taille, i * taille);
+																		Multi.draw(RoiBlanc);
 																	}
 																}
 															}
@@ -2886,89 +2886,89 @@ void main(int argc, char **argv)
 
 								Play.display();
 							}
-							
+
 						}
 
-					if (event.mouseButton.x >= 343 && event.mouseButton.y >= 305)
-					{
-						if (event.mouseButton.x <= 623 && event.mouseButton.y <= 341)
+						if (event.mouseButton.x >= 343 && event.mouseButton.y >= 305)
 						{
-							window.close();
-							RenderWindow Instruction(VideoMode(960, 720), "Instructions");
-
-							Instructions Instructions(Instruction.getSize().x, Instruction.getSize().y);
-
-							while (Instruction.isOpen())
+							if (event.mouseButton.x <= 623 && event.mouseButton.y <= 341)
 							{
-								Event aevent;
-								while (Instruction.pollEvent(aevent))
+								window.close();
+								RenderWindow Instruction(VideoMode(960, 720), "Instructions");
+
+								Instructions Instructions(Instruction.getSize().x, Instruction.getSize().y);
+
+								while (Instruction.isOpen())
 								{
-									if (aevent.type == Event::Closed)
+									Event aevent;
+									while (Instruction.pollEvent(aevent))
 									{
-										Instruction.close();
+										if (aevent.type == Event::Closed)
+										{
+											Instruction.close();
+										}
+
+
+
 									}
 
+									Instruction.clear();
 
-										
+
+									Instruction.draw(Ibackground);
+
+									Instructions.draw(Instruction);
+
+									Instruction.display();
 								}
-									
-								Instruction.clear();
-									
-
-								Instruction.draw(Ibackground);
-
-								Instructions.draw(Instruction);
-
-								Instruction.display();
 							}
 						}
-					}
-					if (event.mouseButton.x >= 340 && event.mouseButton.y >= 400)
-					{
-						if (event.mouseButton.x <= 513 && event.mouseButton.y <= 443)
+						if (event.mouseButton.x >= 340 && event.mouseButton.y >= 400)
 						{
-							window.close();
-							RenderWindow Options(VideoMode(960, 720), "Options");
-
-							Option Option(Options.getSize().x, Options.getSize().y);
-
-							while (Options.isOpen())
+							if (event.mouseButton.x <= 513 && event.mouseButton.y <= 443)
 							{
-								Event aevent;
-								while (Options.pollEvent(aevent))
+								window.close();
+								RenderWindow Options(VideoMode(960, 720), "Options");
+
+								Option Option(Options.getSize().x, Options.getSize().y);
+
+								while (Options.isOpen())
 								{
-									if (aevent.type == Event::Closed)
+									Event aevent;
+									while (Options.pollEvent(aevent))
 									{
-										Options.close();
+										if (aevent.type == Event::Closed)
+										{
+											Options.close();
+										}
+
 									}
-									
+									Options.clear();
+
+									Options.draw(Obackground);
+
+									Option.draw(Options);
+
+									Options.display();
+
 								}
-								Options.clear();
-
-								Options.draw(Obackground);
-
-								Option.draw(Options);
-
-								Options.display();
-
 							}
+
 						}
 
-					}
-
-					if (event.mouseButton.x >= 342 && event.mouseButton.y >= 503)
-					{
-						if (event.mouseButton.x <= 524 && event.mouseButton.y <= 545)
+						if (event.mouseButton.x >= 342 && event.mouseButton.y >= 503)
 						{
-							window.close();
-							break;
-						}
+							if (event.mouseButton.x <= 524 && event.mouseButton.y <= 545)
+							{
+								window.close();
+								break;
+							}
 
+						}
 					}
+
+
 				}
-					
-					
-			}
 			}
 
 			window.clear();
@@ -2976,7 +2976,7 @@ void main(int argc, char **argv)
 			menu.draw(window);
 			window.display();
 
-			
+
 
 
 		}
