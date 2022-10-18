@@ -131,7 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AfficheNP.cpp" />
-    <ClCompile Include="Decor.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Instructions.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -141,7 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AfficheNP.h" />
-    <ClInclude Include="Decor.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Instructions.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Option.h" />
