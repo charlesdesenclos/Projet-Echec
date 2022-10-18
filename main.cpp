@@ -50,7 +50,7 @@ int mutare = 0; // 0 déplace le blanc, 1 déplace le noir
 
 int numarPiesaMutataMultiJugador = 0;
 
-int EchecsBLANC = 0, sahNegru = 0;
+int EchecsBLANC = 0, JeuxEchecsNoir = 0;
 
 int transformationBlanc = 0, transformationNoir = 0;
 
@@ -1885,7 +1885,7 @@ void main(int argc, char **argv)
 																				int h = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (h == 0)
 																				{
-																					sahNegru = 1;
+																					JeuxEchecsNoir = 1;
 																				}
 																			}
 																		}
@@ -2131,10 +2131,10 @@ void main(int argc, char **argv)
 																				{
 																					EchecsBLANC = 0;
 																					posRoiNoir();
-																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
+																					if (JeuxEchecs == 0)
 																					{
-																						sahNegru = 1;
+																						JeuxEchecsNoir = 1;
 																					}
 																					mutare = 1;
 																				}
@@ -2151,10 +2151,10 @@ void main(int argc, char **argv)
 																				else
 																				{
 																					posRoiNoir();
-																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
+																					if (JeuxEchecs == 0)
 																					{
-																						sahNegru = 1;
+																						JeuxEchecsNoir = 1;
 																					}
 																					mutare = 1;
 																				}
@@ -2162,7 +2162,7 @@ void main(int argc, char **argv)
 																		}
 																		else // le noir s'est déplacé et le blanc suit
 																		{
-																			if (sahNegru == 1)
+																			if (JeuxEchecsNoir == 1)
 																			{
 																				posRoiNoir();
 																				int s = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
@@ -2173,10 +2173,10 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					sahNegru = 0;
+																					JeuxEchecsNoir = 0;
 																					posRoiBlanc();
-																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
+																					if (JeuxEchecs == 0)
 																					{
 																						EchecsBLANC = 1;
 																					}
@@ -2195,8 +2195,8 @@ void main(int argc, char **argv)
 																				else
 																				{
 																					posRoiBlanc();
-																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
+																					if (JeuxEchecs == 0)
 																					{
 																						EchecsBLANC = 1;
 																					}
@@ -2439,7 +2439,7 @@ void main(int argc, char **argv)
 																				int h = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
 																				if (h == 0)
 																				{
-																					sahNegru = 1;
+																					JeuxEchecsNoir = 1;
 																				}
 																			}
 																		}
@@ -2689,10 +2689,10 @@ void main(int argc, char **argv)
 																				{
 																					EchecsBLANC = 0;
 																					posRoiNoir();
-																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
+																					if (JeuxEchecs == 0)
 																					{
-																						sahNegru = 1;
+																						JeuxEchecsNoir = 1;
 																					}
 																					//mutare = 1;
 																				}
@@ -2709,10 +2709,10 @@ void main(int argc, char **argv)
 																				else
 																				{
 																					posRoiNoir();
-																					int sah = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
+																					if (JeuxEchecs == 0)
 																					{
-																						sahNegru = 1;
+																						JeuxEchecsNoir = 1;
 																					}
 																					//mutare = 1;
 																				}
@@ -2720,7 +2720,7 @@ void main(int argc, char **argv)
 																		}
 																		else // le noir s'est déplacé et le blanc suit
 																		{
-																			if (sahNegru == 1)
+																			if (JeuxEchecsNoir == 1)
 																			{
 																				posRoiNoir();
 																				int s = RoiNoirJeuxEchecsVerif(roiNoir.x, roiNoir.y);
@@ -2731,10 +2731,10 @@ void main(int argc, char **argv)
 																				}
 																				else
 																				{
-																					sahNegru = 0;
+																					JeuxEchecsNoir = 0;
 																					posRoiBlanc();
-																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
+																					if (JeuxEchecs == 0)
 																					{
 																						EchecsBLANC = 1;
 																					}
@@ -2753,8 +2753,8 @@ void main(int argc, char **argv)
 																				else
 																				{
 																					posRoiBlanc();
-																					int sah = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
-																					if (sah == 0)
+																					int JeuxEchecs = RoiBlancJeuxEchecsVerif(roiBlanc.x, roiBlanc.y);
+																					if (JeuxEchecs == 0)
 																					{
 																						EchecsBLANC = 1;
 																					}

@@ -24,43 +24,43 @@ public:
 
 	int FouN(int ox, int oy, int nx, int ny);
 
-	int RenneB(int ox, int oy, int nx, int ny);
+	int ReineB(int ox, int oy, int nx, int ny);
 
-	int RenneN(int ox, int oy, int nx, int ny);
+	int ReineN(int ox, int oy, int nx, int ny);
 
 	int ChevalB(int ox, int oy, int nx, int ny);
 
 	int ChevalN(int ox, int oy, int nx, int ny);
 
-	int Pionechecs(int posx, int posy, int regex, int regey);
+	int PionBJeuxEchecs(int posx, int posy, int regex, int regey);
 
-	int Tourechecs(int ox, int oy, int regex, int regey);
+	int TourBJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int Fouechecs(int ox, int oy, int regex, int regey);
+	int FouBJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int Reinneechecs(int ox, int oy, int regex, int regey);
+	int ReinneBJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int Chevalechecs(int ox, int oy, int regex, int regey);
+	int ChevalBJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int RoiBechec(int ox, int oy, int regex, int regey);
+	int RoiBJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int PionNechec(int ox, int oy, int regex, int regey);
+	int PionNJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int TourNechec(int ox, int oy, int regex, int regey);
+	int TourNJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int FouNechec(int ox, int oy, int regex, int regey);
+	int FouNJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int RenneNechec(int ox, int oy, int regex, int regey);
+	int ReinneNJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int ChevalNechec(int ox, int oy, int regex, int regey);
+	int ChevalNJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int RoiNechec(int ox, int oy, int regex, int regey);
+	int RoiNJeuxEchecs(int ox, int oy, int regex, int regey);
 
-	int BlackKingCheck(int posRegex, int posRegey);
+	int RoiNoirJeuxEchecsVerif(int posRegex, int posRegey);
 
 	int RoiN(int ox, int oy, int nx, int ny);
 
-	int WhiteKingVérifier(int posRegex, int posRegey);
+	int RoiBlancJeuxEchecsVerif(int posRegex, int posRegey);
 
 	int RoiB(int ox, int oy, int nx, int ny);
 
